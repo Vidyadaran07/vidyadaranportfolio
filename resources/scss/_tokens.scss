@@ -1,0 +1,64 @@
+// -----------------------------------------------------------------------------
+// Design tokens for VidyadaranPortfolio.
+// Brand colours first, then Bootstrap variable overrides (must load before
+// Bootstrap itself).
+// -----------------------------------------------------------------------------
+
+// Brand palette
+$vm-night:        #0F1115; // hero, mindset band, footer, navbar
+$vm-night-2:      #171A20; // raised surfaces on dark
+$vm-night-line:   #262A31; // borders on dark
+$vm-mist:         #F5F6F7; // alternate light sections
+$vm-line:         #E4E6E9; // borders on light
+$vm-ink:          #1A1D23; // headings and main text
+$vm-slate:        #5F6670; // supporting text
+$vm-soft:         #9AA1AB; // muted text on dark
+$vm-teal:         #0B7F79; // the one accent (4.9:1 with white text)
+$vm-teal-bright:  #2BB3AA; // accent on dark backgrounds
+$vm-teal-wash:    #E6F4F2; // tinted backgrounds for small badges
+
+$vm-nav-height:   4.5rem;
+
+// Bootstrap overrides
+$primary:               $vm-teal;
+$dark:                  $vm-night;
+$light:                 $vm-mist;
+$body-color:            $vm-ink;
+$body-secondary-color:  $vm-slate;
+$border-color:          $vm-line;
+
+$link-color:                 $vm-teal;
+$link-decoration:            none;
+$link-hover-decoration:      underline;
+$link-underline-offset:      .2em;
+
+$font-family-sans-serif: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace:  "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+$font-size-base:         1.0625rem; // 17px
+$line-height-base:       1.65;
+$headings-font-weight:   650;
+$headings-line-height:   1.1;
+$headings-color:         $vm-ink;
+
+$border-radius:     .5rem;
+$border-radius-sm:  .375rem;
+$border-radius-lg:  .75rem;
+
+$btn-padding-y:      .75rem;
+$btn-padding-x:      1.5rem;
+$btn-font-weight:    550;
+$btn-padding-y-sm:   .5rem;
+$btn-padding-x-sm:   1rem;
+$btn-font-size-sm:   .9375rem;
+
+$focus-ring-color:   rgba($vm-teal-bright, .45);
+$focus-ring-width:   .1875rem;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1200px
+);
+$grid-gutter-width: 2.5rem;

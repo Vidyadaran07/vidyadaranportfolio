@@ -1,0 +1,12 @@
+// -----------------------------------------------------------------------------
+// VidyadaranPortfolio — main stylesheet
+// Order matters: tokens -> Bootstrap -> our partials.
+// -----------------------------------------------------------------------------
+
+@import "tokens";
+@import "bootstrap/scss/bootstrap";
+
+@import "base";
+@import "navbar";
+@import "hero";
+@import "footer";

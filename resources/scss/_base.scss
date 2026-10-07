@@ -1,0 +1,103 @@
+// -----------------------------------------------------------------------------
+// Base styles shared by every page.
+// -----------------------------------------------------------------------------
+
+html {
+  scroll-padding-top: $vm-nav-height; // anchors land below the sticky navbar
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -.025em;
+}
+
+// Skip link: hidden until focused with the keyboard
+.skip-link {
+  position: absolute;
+  top: .75rem;
+  left: .75rem;
+  z-index: $zindex-fixed + 10;
+  padding: .5rem 1rem;
+  border-radius: $border-radius;
+  background: $white;
+  color: $vm-ink;
+  font-weight: 600;
+}
+
+// Visible keyboard focus everywhere
+:focus-visible {
+  outline: $focus-ring-width solid $vm-teal-bright;
+  outline-offset: 2px;
+}
+
+// Page sections
+.section {
+  padding-block: 5rem;
+
+  @include media-breakpoint-up(lg) {
+    padding-block: 7.5rem;
+  }
+}
+
+.section-alt {
+  background-color: $vm-mist;
+}
+
+.section-dark {
+  --bs-heading-color: #{$white};
+  background-color: $vm-night;
+  color: $white;
+}
+
+.section-title {
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 2.75rem);
+  margin-bottom: 0;
+}
+
+.lede {
+  color: $vm-slate;
+  font-size: 1.1875rem;
+  max-width: 60ch;
+  margin-top: 1rem;
+}
+
+// Monospace technology tag
+.chip {
+  display: inline-block;
+  font-family: $font-family-monospace;
+  font-size: .8125rem;
+  line-height: 1.4;
+  padding: .3rem .625rem;
+  border: 1px solid $vm-line;
+  border-radius: $border-radius-sm;
+  background: $vm-mist;
+  color: $vm-ink;
+  white-space: nowrap;
+}
+
+// Highlights values that still need real content (YOUR_EMAIL, START_DATE…)
+.placeholder-value {
+  font-family: $font-family-monospace;
+  font-size: .875em;
+  padding: .05rem .375rem;
+  border-radius: .25rem;
+  background: $vm-teal-wash;
+  color: $vm-teal;
+}
+
+// Respect reduced-motion preferences
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
