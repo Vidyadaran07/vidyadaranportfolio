@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { width: 1200px; height: 675px; overflow: hidden; }
+  /* Drawn at 85% size, then zoomed to fill 1200x675 */
+  body { width: 1017px; height: 572px; zoom: 1.18; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  body { font-family: "Geist", sans-serif; font-size: 13px; color: #0F172A;
+         background: radial-gradient(70% 90% at 15% 0%, #DBE6FE, transparent 60%), radial-gradient(60% 80% at 100% 100%, #E0E7FF, transparent 60%), #F5F7FC;
+         padding: 0 40px; }
+  .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .head h1 { font-size: 26px; letter-spacing: -.03em; }
+  .head p { color: #64748B; margin-top: 3px; }
+  .head .r { display: flex; gap: 10px; align-items: center; }
+  .seg { display: flex; background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; padding: 3px; }
+  .seg span { padding: 7px 14px; border-radius: 7px; color: #64748B; font-weight: 500; }
+  .seg .on { background: #2563EB; color: #fff; }
+  .btn { background: #0F172A; color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 600; }
+  .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .col { background: rgba(255,255,255,.6); border: 1px solid #E2E8F0; border-radius: 14px; padding: 12px; }
+  .col h2 { font-size: 13px; display: flex; align-items: center; gap: 8px; margin: 2px 4px 12px; }
+  .col h2 i { width: 9px; height: 9px; border-radius: 50%; }
+  .col h2 em { margin-left: auto; font-style: normal; color: #64748B; background: #F1F5F9; border-radius: 99px; padding: 1px 8px; font-weight: 500; }
+  .card { background: #fff; border: 1px solid #E8ECF3; border-radius: 11px; padding: 12px; margin-bottom: 10px; box-shadow: 0 4px 12px -8px rgba(15,23,42,.25); }
+  .card b { display: block; font-size: 13.5px; }
+  .card small { color: #64748B; }
+  .card .f { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; }
+  .amt { font-weight: 700; }
+  .av { width: 24px; height: 24px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-size: 10px; font-weight: 700; }
+  .lift { transform: rotate(-2deg) translateY(-4px); box-shadow: 0 18px 30px -12px rgba(37,99,235,.45); border-color: #93B4FB; }
+</style></head><body>
+  <div class="head">
+    <div><h1>Sales Pipeline</h1><p>Drag leads between stages · 48 open deals</p></div>
+    <div class="r"><div class="seg"><span class="on">Board</span><span>List</span><span>Calendar</span></div><div class="btn">+ New Lead</div></div>
+  </div>
+  <div class="board">
+    <div class="col">
+      <h2><i style="background:#60A5FA"></i>New <em>14</em></h2>
+      <div class="card"><b>Arun Kumar</b><small>Website enquiry · Retail</small><div class="f"><span class="tag" style="background:#EEF3FF;color:#1D4ED8">Hot</span><div class="av" style="background:#2563EB">PR</div></div></div>
+      <div class="card"><b>Sneha Nair</b><small>Walk-in · Education</small><div class="f"><span class="tag" style="background:#F1F5F9;color:#475569">Cold</span><div class="av" style="background:#0EA5E9">KA</div></div></div>
+      <div class="card"><b>Imran Sheikh</b><small>Campaign · Logistics</small><div class="f"><span class="tag" style="background:#FEF6E7;color:#B45309">Warm</span><div class="av" style="background:#7C3AED">RA</div></div></div>
+    </div>
+    <div class="col">
+      <h2><i style="background:#F59E0B"></i>Contacted <em>11</em></h2>
+      <div class="card lift"><b>Meena Shankar</b><small>Referral · Healthcare</small><div class="f"><span class="amt">₹1.2L</span><div class="av" style="background:#F59E0B">RA</div></div></div>
+      <div class="card"><b>Ravi Varma</b><small>Website · Real estate</small><div class="f"><span class="amt">₹85K</span><div class="av" style="background:#2563EB">PR</div></div></div>
+      <div class="card"><b>Lakshmi R.</b><small>Call · Manufacturing</small><div class="f"><span class="amt">₹2.4L</span><div class="av" style="background:#10B981">KA</div></div></div>
+    </div>
+    <div class="col">
+      <h2><i style="background:#8B5CF6"></i>Proposal <em>9</em></h2>
+      <div class="card"><b>John Peter</b><small>Proposal sent · Follow-up Fri</small><div class="f"><span class="amt">₹3.6L</span><div class="av" style="background:#7C3AED">RA</div></div></div>
+      <div class="card"><b>Divya Menon</b><small>Demo booked · Tue 11 AM</small><div class="f"><span class="amt">₹1.8L</span><div class="av" style="background:#0EA5E9">KA</div></div></div>
+    </div>
+    <div class="col">
+      <h2><i style="background:#16A34A"></i>Won <em>14</em></h2>
+      <div class="card" style="border-color:#BBF7D0"><b>Vijay Mohan</b><small>Signed · Annual plan</small><div class="f"><span class="tag" style="background:#ECFDF3;color:#15803D">✓ Won ₹4.2L</span><div class="av" style="background:#16A34A">PR</div></div></div>
+      <div class="card" style="border-color:#BBF7D0"><b>Pooja Sharma</b><small>Signed · Starter plan</small><div class="f"><span class="tag" style="background:#ECFDF3;color:#15803D">✓ Won ₹65K</span><div class="av" style="background:#2563EB">KA</div></div></div>
+    </div>
+  </div>
+</body></html>

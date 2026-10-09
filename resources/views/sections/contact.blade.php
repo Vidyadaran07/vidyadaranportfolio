@@ -1,45 +1,132 @@
-{{-- Closing card: career objective and contact in one place. --}}
+{{-- Resume card next to the Contact card (details + message form). --}}
 @php
-    $objective = config('portfolio.objective.paragraphs');
-    $labels = ['Now', 'Next', 'Long term'];
+    $email = config('portfolio.email');
+    $linkedin = config('portfolio.linkedin_url');
 @endphp
 
-<section id="contact" class="section" aria-labelledby="contact-heading">
+<section id="contact" class="section" aria-label="Resume and contact">
     <div class="container">
-        <div class="surface closing" data-reveal>
-            @if ($availability = config('portfolio.availability'))
-                <span class="status-pill">
-                    <span class="status-dot" aria-hidden="true"></span>
-                    {{ $availability }}
-                </span>
-            @endif
+        <div class="row g-4">
 
-            <h2 id="contact-heading" class="section-title mt-4">Let's build something <span class="accent">useful</span></h2>
-            <p class="lede">{{ config('portfolio.contact.intro') }}</p>
+            <div class="col-lg-4">
+                <article class="card-panel resume-card" data-reveal>
+                    <span class="icon-box" aria-hidden="true"><i class="bi bi-file-earmark-person"></i></span>
+                    @if ($resumeUrl)
+                        <h2>Resume</h2>
+                        <p>Download my resume to learn more about my experience, skills and projects.</p>
+                    @else
+                        <h2>Career Objective</h2>
+                        <p>{{ config('portfolio.objective') }}</p>
+                    @endif
 
-            <div class="contact-actions">
-                @if ($email = config('portfolio.email'))
-                    <a class="btn btn-primary" href="mailto:{{ $email }}">
-                        <i class="bi bi-envelope me-2" aria-hidden="true"></i>{{ $email }}
-                    </a>
-                @endif
-                @if ($linkedin = config('portfolio.linkedin_url'))
-                    <a class="btn btn-ghost-dark" href="{{ $linkedin }}" target="_blank" rel="noopener">
-                        <i class="bi bi-linkedin me-2" aria-hidden="true"></i>Message on LinkedIn
-                    </a>
-                @endif
-            </div>
-
-            <x-social-links class="contact-links" />
-
-            <div class="objective-points">
-                @foreach ($objective as $point)
-                    <div>
-                        <div class="tile-label">{{ $labels[$loop->index] ?? '' }}</div>
-                        {{ $point }}
+                    <div class="resume-actions">
+                        @if ($resumeUrl)
+                            <a class="btn btn-primary" href="{{ $resumeUrl }}" target="_blank" rel="noopener">
+                                <i class="bi bi-download me-2" aria-hidden="true"></i>Download Resume
+                            </a>
+                        @endif
+                        @if ($linkedin)
+                            <a class="btn btn-outline-ink" href="{{ $linkedin }}" target="_blank" rel="noopener">
+                                <i class="bi bi-linkedin me-2" aria-hidden="true"></i>View on LinkedIn
+                            </a>
+                        @endif
                     </div>
-                @endforeach
+                </article>
             </div>
+
+            <div class="col-lg-8">
+                <article class="card-panel h-100" data-reveal style="--reveal-delay: .08s">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <h2 class="section-title">Contact Me</h2>
+                            <p class="mb-4">{{ config('portfolio.contact.intro') }}</p>
+
+                            <ul class="info-list">
+                                @if ($email)
+                                    <li>
+                                        <span class="icon-box" aria-hidden="true"><i class="bi bi-envelope"></i></span>
+                                        <span>
+                                            <span class="info-label">Email</span>
+                                            <a class="info-value" href="mailto:{{ $email }}">{{ $email }}</a>
+                                        </span>
+                                    </li>
+                                @endif
+                                @if ($linkedin)
+                                    <li>
+                                        <span class="icon-box" aria-hidden="true"><i class="bi bi-linkedin"></i></span>
+                                        <span>
+                                            <span class="info-label">LinkedIn</span>
+                                            <a class="info-value" href="{{ $linkedin }}" target="_blank" rel="noopener">Vidyadaran M</a>
+                                        </span>
+                                    </li>
+                                @endif
+                                <li>
+                                    <span class="icon-box" aria-hidden="true"><i class="bi bi-geo-alt"></i></span>
+                                    <span>
+                                        <span class="info-label">Location</span>
+                                        <span class="info-value">{{ config('portfolio.location') }}</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-7">
+                            @if (session('contact_sent'))
+                                <div class="alert alert-success d-flex gap-2" role="status">
+                                    <i class="bi bi-check-circle" aria-hidden="true"></i>
+                                    <span>Thanks! Your message has been sent. I will get back to you soon.</span>
+                                </div>
+                            @endif
+
+                            @if (session('contact_failed'))
+                                <div class="alert alert-danger d-flex gap-2" role="alert">
+                                    <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+                                    <span>Sorry, your message could not be sent right now. Please email me directly at <a href="mailto:{{ $email }}">{{ $email }}</a>.</span>
+                                </div>
+                            @endif
+
+                            <form class="contact-form" method="POST" action="{{ route('contact.send') }}" novalidate>
+                                @csrf
+
+                                {{-- Spam trap: hidden from people, filled in by bots --}}
+                                <div class="form-trap" aria-hidden="true">
+                                    <label for="website">Website</label>
+                                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="contact-name" class="form-label">Your name</label>
+                                    <input type="text" id="contact-name" name="name" value="{{ old('name') }}" required maxlength="100" autocomplete="name"
+                                           @class(['form-control', 'is-invalid' => $errors->has('name')])
+                                           @error('name') aria-describedby="contact-name-error" @enderror>
+                                    @error('name')<div id="contact-name-error" class="invalid-feedback">{{ $message }}</div>@enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="contact-email" class="form-label">Your email</label>
+                                    <input type="email" id="contact-email" name="email" value="{{ old('email') }}" required maxlength="150" autocomplete="email"
+                                           @class(['form-control', 'is-invalid' => $errors->has('email')])
+                                           @error('email') aria-describedby="contact-email-error" @enderror>
+                                    @error('email')<div id="contact-email-error" class="invalid-feedback">{{ $message }}</div>@enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="contact-message" class="form-label">Message</label>
+                                    <textarea id="contact-message" name="message" required minlength="10" maxlength="3000" rows="5"
+                                              @class(['form-control', 'is-invalid' => $errors->has('message')])
+                                              @error('message') aria-describedby="contact-message-error" @enderror>{{ old('message') }}</textarea>
+                                    @error('message')<div id="contact-message-error" class="invalid-feedback">{{ $message }}</div>@enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-send me-2" aria-hidden="true"></i>Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
         </div>
     </div>
 </section>

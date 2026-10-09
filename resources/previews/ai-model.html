@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 675px; overflow: hidden; }
+  body { font-family: "Geist", sans-serif; color: #E2E8F0; background: radial-gradient(60% 80% at 85% 10%, rgba(34,197,94,.25), transparent 60%), radial-gradient(50% 70% at 0% 100%, rgba(6,182,212,.2), transparent 60%), #05080F; padding: 40px 48px; }
+  .win { background: #0D1117; border: 1px solid #1F2937; border-radius: 14px; overflow: hidden; height: 100%; display: grid; grid-template-rows: 38px 1fr; box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); }
+  .bar { display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #0A0E14; border-bottom: 1px solid #1F2937; }
+  .bar i { width: 11px; height: 11px; border-radius: 50%; }
+  .tab { margin-left: 16px; font-family: "Geist Mono", monospace; font-size: 12px; padding: 6px 12px; border-radius: 7px 7px 0 0; color: #94A3B8; }
+  .tab.on { background: #0D1117; color: #E2E8F0; box-shadow: inset 0 2px #22C55E; }
+  .split { display: grid; grid-template-columns: 1.15fr 1fr; }
+  pre { font-family: "Geist Mono", monospace; font-size: 13px; line-height: 1.75; padding: 18px 20px; border-right: 1px solid #1F2937; counter-reset: l; }
+  pre span.ln { color: #374151; display: inline-block; width: 26px; }
+  .k { color: #FF7B72; } .f { color: #D2A8FF; } .s { color: #A5D6FF; } .n { color: #79C0FF; } .c { color: #6B7280; font-style: italic; } .v { color: #FFA657; }
+  .out { padding: 18px 20px; display: grid; gap: 14px; align-content: start; }
+  .out h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: #6B7280; }
+  .card { background: #0A0E14; border: 1px solid #1F2937; border-radius: 12px; padding: 14px; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .metrics div { background: #0A0E14; border: 1px solid #1F2937; border-radius: 10px; padding: 10px 12px; }
+  .metrics small { color: #6B7280; font-size: 11px; display: block; }
+  .metrics b { font-family: "Geist Mono", monospace; font-size: 18px; color: #4ADE80; }
+  .log { font-family: "Geist Mono", monospace; font-size: 11.5px; color: #94A3B8; line-height: 1.8; }
+  .log b { color: #4ADE80; font-weight: 500; }
+</style></head><body>
+<div class="win">
+  <div class="bar"><i style="background:#FF6B6B"></i><i style="background:#FFC24B"></i><i style="background:#36C88A"></i><span class="tab on">train.py</span><span class="tab">dataset.py</span><span class="tab">notes.md</span></div>
+  <div class="split">
+<pre><span class="ln">1</span><span class="k">import</span> torch
+<span class="ln">2</span><span class="k">from</span> model <span class="k">import</span> <span class="n">Classifier</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c"># sample training loop (illustration)</span>
+<span class="ln">5</span><span class="v">model</span> = <span class="n">Classifier</span>(hidden=<span class="n">256</span>)
+<span class="ln">6</span><span class="v">opt</span> = torch.optim.<span class="f">Adam</span>(model.<span class="f">parameters</span>(), lr=<span class="n">1e-3</span>)
+<span class="ln">7</span>
+<span class="ln">8</span><span class="k">for</span> <span class="v">epoch</span> <span class="k">in</span> <span class="f">range</span>(<span class="n">30</span>):
+<span class="ln">9</span>    <span class="k">for</span> <span class="v">x</span>, <span class="v">y</span> <span class="k">in</span> train_loader:
+<span class="ln">10</span>        loss = criterion(<span class="f">model</span>(x), y)
+<span class="ln">11</span>        opt.<span class="f">zero_grad</span>()
+<span class="ln">12</span>        loss.<span class="f">backward</span>()
+<span class="ln">13</span>        opt.<span class="f">step</span>()
+<span class="ln">14</span>
+<span class="ln">15</span>    acc = <span class="f">evaluate</span>(model, val_loader)
+<span class="ln">16</span>    <span class="f">print</span>(<span class="s">f"epoch {epoch} loss {loss:.3f} acc {acc:.1%}"</span>)
+</pre>
+    <div class="out">
+      <h3>Output</h3>
+      <div class="metrics"><div><small>Epoch</small><b>18/30</b></div><div><small>Loss</small><b>0.214</b></div><div><small>Val acc</small><b>91.4%</b></div></div>
+      <div class="card">
+        <svg viewBox="0 0 440 150" width="100%" height="150" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#22C55E" stop-opacity=".45"/><stop offset="1" stop-color="#22C55E" stop-opacity="0"/></linearGradient></defs>
+          <g stroke="#1F2937"><line x1="0" y1="30" x2="440" y2="30"/><line x1="0" y1="75" x2="440" y2="75"/><line x1="0" y1="120" x2="440" y2="120"/></g>
+          <path d="M0 10 C 60 60, 110 95, 170 108 S 290 122, 350 126 S 410 128, 440 129 L440 150 L0 150 Z" fill="url(#g)"/>
+          <path d="M0 10 C 60 60, 110 95, 170 108 S 290 122, 350 126 S 410 128, 440 129" fill="none" stroke="#22C55E" stroke-width="3"/>
+          <path d="M0 18 C 60 66, 110 98, 170 110 S 290 118, 350 120 S 410 121, 440 121" fill="none" stroke="#22D3EE" stroke-width="2" stroke-dasharray="6 5"/>
+        </svg>
+      </div>
+      <div class="log">epoch 16 loss 0.251 acc 90.2%<br>epoch 17 loss 0.229 acc 90.8%<br><b>epoch 18 loss 0.214 acc 91.4%</b></div>
+    </div>
+  </div>
+</div>
+</body></html>

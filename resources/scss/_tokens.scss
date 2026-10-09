@@ -1,73 +1,83 @@
 // -----------------------------------------------------------------------------
 // Design tokens for VidyadaranPortfolio.
-// One continuous dark theme. Brand colours first, then Bootstrap variable
+// Light "dashboard card" theme: light page, white cards, blue accent,
+// dark navy hero and footer. Brand colours first, then Bootstrap variable
 // overrides (must load before Bootstrap itself).
 // -----------------------------------------------------------------------------
 
-// Brand palette
-$vm-night:        #0A0C10; // page background
-$vm-night-2:      #11141A; // raised surfaces (cards, tiles)
-$vm-night-3:      #171B22; // hover surfaces, inner panels
-$vm-night-line:   #222731; // borders on dark
-$vm-night-line-2: #2E3440; // stronger borders
-$vm-white:        #F4F6F8; // headings
-$vm-text:         #B4BBC6; // body text
-$vm-soft:         #8A929E; // muted text
-$vm-dim:          #5F6772; // very muted (captions)
-$vm-teal:         #0B7F79; // buttons (4.9:1 with white text)
-$vm-teal-bright:  #2BB3AA; // accent on dark
-$vm-teal-glow:    #5EEAD4; // highlights, gradient end
-$vm-green:        #34D399; // "available" status dot
+// Light surfaces
+$vm-page:        #F3F5F9; // page background
+$vm-card:        #FFFFFF; // cards
+$vm-line:        #E4E8EF; // card borders, dividers
+$vm-line-soft:   #EEF1F6; // inner dividers
 
-$vm-nav-height:   5.5rem;  // floating navbar plus its top margin
+// Text on light
+$vm-ink:         #0F172A; // headings
+$vm-text:        #475569; // body text
+$vm-muted:       #64748B; // supporting text
+
+// Blue accent
+$vm-blue:        #2563EB; // buttons, links (5.2:1 with white text)
+$vm-blue-dark:   #1D4ED8; // hover
+$vm-blue-soft:   #EEF3FF; // icon backgrounds, badges
+$vm-blue-on-dark:#60A5FA; // accent on navy
+
+// Dark navy (hero, navbar, footer)
+$vm-navy:        #0B1220;
+$vm-navy-2:      #111A2E; // raised surfaces on navy
+$vm-navy-line:   #1E293B; // borders on navy
+$vm-on-navy:     #CBD5E1; // body text on navy
+$vm-on-navy-dim: #94A3B8; // muted text on navy
+
+$vm-green:       #16A34A; // availability dot
+
+$vm-nav-height:  4.5rem;
+
+// Card shadow
+$vm-shadow:      0 1px 2px rgba(15, 23, 42, .04), 0 8px 24px -12px rgba(15, 23, 42, .12);
+$vm-shadow-lg:   0 2px 4px rgba(15, 23, 42, .04), 0 18px 40px -16px rgba(15, 23, 42, .22);
 
 // Bootstrap overrides
-$primary:               $vm-teal;
-$dark:                  $vm-night;
-$body-bg:               $vm-night;
+$primary:               $vm-blue;
+$dark:                  $vm-navy;
+$light:                 $vm-page;
+$body-bg:               $vm-page;
 $body-color:            $vm-text;
-$body-secondary-color:  $vm-soft;
-$border-color:          $vm-night-line;
+$body-secondary-color:  $vm-muted;
+$border-color:          $vm-line;
 
-// Same values for Bootstrap's dark mode (<html data-bs-theme="dark">)
-$body-bg-dark:              $vm-night;
-$body-color-dark:           $vm-text;
-$body-secondary-color-dark: $vm-soft;
-$body-tertiary-bg-dark:     $vm-night-2;
-$border-color-dark:         $vm-night-line;
-$headings-color-dark:       $vm-white;
-$link-color-dark:           $vm-teal-bright;
-$link-hover-color-dark:     $vm-teal-glow;
-
-$link-color:                 $vm-teal-bright;
-$link-hover-color:           $vm-teal-glow;
+$link-color:                 $vm-blue;
+$link-hover-color:           $vm-blue-dark;
 $link-decoration:            none;
 $link-hover-decoration:      none;
 
 $font-family-sans-serif: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-monospace:  "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-$vm-font-serif:          "Instrument Serif", Georgia, "Times New Roman", serif;
-$font-size-base:         1.0625rem; // 17px
+$font-size-base:         1rem;
 $line-height-base:       1.65;
-$headings-font-weight:   650;
-$headings-line-height:   1.1;
-$headings-color:         $vm-white;
+$headings-font-weight:   700;
+$headings-line-height:   1.15;
+$headings-color:         $vm-ink;
 
 $border-radius:     .625rem;
 $border-radius-sm:  .375rem;
 $border-radius-lg:  1rem;
-$border-radius-xl:  1.5rem;
+$border-radius-xl:  1.25rem;
 
-$btn-padding-y:      .75rem;
-$btn-padding-x:      1.5rem;
-$btn-font-weight:    550;
-$btn-border-radius:  999px;
-$btn-border-radius-sm: 999px;
-$btn-padding-y-sm:   .5rem;
-$btn-padding-x-sm:   1.125rem;
-$btn-font-size-sm:   .9375rem;
+$btn-padding-y:      .7rem;
+$btn-padding-x:      1.375rem;
+$btn-font-weight:    600;
+$btn-padding-y-sm:   .45rem;
+$btn-padding-x-sm:   1rem;
+$btn-font-size-sm:   .875rem;
 
-$focus-ring-color:   rgba($vm-teal-bright, .45);
+$input-padding-y:        .75rem;
+$input-padding-x:        1rem;
+$input-border-color:     $vm-line;
+$input-focus-border-color: $vm-blue;
+$input-placeholder-color: #94A3B8;
+
+$focus-ring-color:   rgba($vm-blue, .3);
 $focus-ring-width:   .1875rem;
 
 $container-max-widths: (
@@ -75,6 +85,6 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1140px,
-  xxl: 1200px
+  xxl: 1240px
 );
-$grid-gutter-width: 2.5rem;
+$grid-gutter-width: 1.5rem;

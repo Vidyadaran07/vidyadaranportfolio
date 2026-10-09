@@ -1,0 +1,74 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { width: 1200px; height: 675px; overflow: hidden; }
+  /* Drawn at 80% size, then zoomed to fill 1200x675 */
+  body { width: 960px; height: 540px; zoom: 1.25; overflow: hidden; }
+  body { font-family: "Geist", sans-serif; font-size: 13px; color: #0F172A; background: linear-gradient(160deg, #CCFBF1, #F0FDFA 45%, #F8FAFC); }
+  .nav { height: 58px; background: #fff; border-bottom: 1px solid #E2E8F0; display: flex; align-items: center; gap: 28px; padding: 0 40px; }
+  .nav b { font-size: 17px; color: #0F766E; margin-right: 14px; }
+  .nav span { color: #64748B; font-weight: 500; }
+  .nav .on { color: #0F766E; box-shadow: inset 0 -2px #0D9488; padding: 19px 0; }
+  .wrap { display: grid; grid-template-columns: 340px 1fr; gap: 20px; padding: 26px 40px; }
+  .box { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px -18px rgba(15,23,42,.3); }
+  .profile { text-align: center; }
+  .ava { width: 96px; height: 96px; border-radius: 50%; margin: 6px auto 12px; background: linear-gradient(135deg, #14B8A6, #0F766E); color: #fff; font-size: 34px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 6px #CCFBF1; }
+  .profile h1 { font-size: 21px; }
+  .profile p { color: #64748B; margin-top: 2px; }
+  .chip { display: inline-block; margin-top: 10px; background: #F0FDFA; color: #0F766E; border-radius: 99px; padding: 4px 12px; font-weight: 600; font-size: 12px; }
+  .rows { margin-top: 18px; text-align: left; display: grid; gap: 0; }
+  .rows div { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #F1F5F9; }
+  .rows span { color: #64748B; }
+  .right { display: grid; grid-template-rows: auto 1fr; gap: 20px; }
+  .cal { gap: 8px; }
+  .up { margin-top: 16px; display: flex; gap: 12px; align-items: center; background: #F0FDFA; border: 1px dashed #5EEAD4; border-radius: 12px; padding: 12px 14px; }
+  .up b { display: block; } .up small { color: #64748B; }
+  .up i { width: 38px; height: 38px; border-radius: 10px; background: #0D9488; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 12px; }
+  h2 { font-size: 15px; margin-bottom: 14px; display: flex; justify-content: space-between; }
+  h2 small { color: #64748B; font-weight: 500; font-size: 12px; }
+  .cal { display: grid; grid-template-columns: repeat(14, 1fr); gap: 6px; }
+  .cal i { aspect-ratio: 1; border-radius: 6px; background: #14B8A6; }
+  .cal i.l { background: #99F6E4; } .cal i.a { background: #FCA5A5; } .cal i.w { background: #F1F5F9; } .cal i.h { background: #FDE68A; }
+  .legend { display: flex; gap: 16px; margin-top: 12px; color: #64748B; font-size: 12px; }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--c); vertical-align: -1px; }
+  .rings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .ring { display: flex; align-items: center; gap: 12px; background: #F8FAFC; border-radius: 12px; padding: 12px; }
+  .ring b { display: block; font-size: 18px; }
+  .ring small { color: #64748B; }
+</style></head><body>
+  <div class="nav"><b>PeopleHub</b><span>Dashboard</span><span class="on">Employees</span><span>Attendance</span><span>Leave</span><span>Documents</span></div>
+  <div class="wrap">
+    <div class="box profile">
+      <div class="ava">DK</div>
+      <h1>Divya Krishnan</h1>
+      <p>Software Developer · Engineering</p>
+      <span class="chip">● Active · EMP-0142</span>
+      <div class="rows">
+        <div><span>Reporting to</span><b>Vijay Mohan</b></div>
+        <div><span>Joined</span><b>12 Jan 2024</b></div>
+        <div><span>Work location</span><b>Head Office</b></div>
+        <div><span>Employment</span><b>Full-time</b></div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="box">
+        <h2>Attendance · October <small>21 present · 1 leave · 0 absent</small></h2>
+        <div class="cal">
+          <i></i><i></i><i></i><i></i><i></i><i class="w"></i><i class="w"></i><i></i><i></i><i class="l"></i><i></i><i></i><i class="w"></i><i class="w"></i>
+          <i></i><i class="h"></i><i></i><i></i><i></i><i class="w"></i><i class="w"></i><i></i><i></i><i></i><i></i><i></i><i class="w"></i><i class="w"></i>
+        </div>
+        <div class="legend"><span style="--c:#14B8A6">Present</span><span style="--c:#99F6E4">Leave</span><span style="--c:#FDE68A">Holiday</span><span style="--c:#FCA5A5">Absent</span></div>
+      </div>
+      <div class="box">
+        <h2>Leave Balance <small>2026</small></h2>
+        <div class="rings">
+          <div class="ring"><svg width="52" height="52" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#E2E8F0" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#0D9488" stroke-width="4" stroke-dasharray="66 94" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><div><b>8 / 12</b><small>Casual</small></div></div>
+          <div class="ring"><svg width="52" height="52" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#E2E8F0" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#F59E0B" stroke-width="4" stroke-dasharray="47 94" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><div><b>5 / 10</b><small>Sick</small></div></div>
+          <div class="ring"><svg width="52" height="52" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#E2E8F0" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#6366F1" stroke-width="4" stroke-dasharray="80 94" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><div><b>13 / 15</b><small>Earned</small></div></div>
+        </div>
+        <div class="up"><i>24</i><div><b>Upcoming leave · Casual</b><small>Thu 24 Oct · Approved by Vijay Mohan</small></div></div>
+      </div>
+    </div>
+  </div>
+</body></html>

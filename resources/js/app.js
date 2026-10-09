@@ -1,10 +1,9 @@
 import './bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
-import 'devicon/devicon.min.css';
 import Collapse from 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/modal'; // project "View Details" dialogs
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = window.matchMedia('(pointer: fine)').matches;
 
 /**
  * Mobile menu: close it after a link is tapped.
@@ -42,14 +41,17 @@ if (sections.length) {
         });
     };
 
-    // The current section is the last one whose top has passed 40% of the screen.
+    // The current section is the lowest one whose top has passed 40% of the screen.
+    // Side-by-side sections (About and Skills) share a top, so the first one wins the tie.
     // At the very bottom of the page the last section wins, even if it is short.
     const update = () => {
         const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
         const line = window.innerHeight * 0.4;
-        const current = atBottom
-            ? sections[sections.length - 1]
-            : sections.filter((section) => section.getBoundingClientRect().top <= line).pop() ?? sections[0];
+        const passed = sections
+            .map((section) => ({ section, top: section.getBoundingClientRect().top }))
+            .filter(({ top }) => top <= line);
+        const lowest = passed.reduce((best, item) => (!best || item.top > best.top + 1 ? item : best), null);
+        const current = atBottom ? sections[sections.length - 1] : lowest?.section ?? sections[0];
 
         setActive(current.id);
     };
@@ -91,28 +93,38 @@ if (reduceMotion || !('IntersectionObserver' in window)) {
 }
 
 /**
- * Mouse effects (desktop only): a soft page glow that follows the cursor,
- * and a border glow on cards near the cursor.
+ * "Build this for me" buttons: fill the contact message with the chosen solution,
+ * then go to the form. Inside a dialog, wait until it has closed first.
  */
-if (finePointer && !reduceMotion) {
-    const root = document.documentElement;
-    const cards = document.querySelectorAll('.glow-card');
-    let frame = null;
+const messageField = document.getElementById('contact-message');
 
-    window.addEventListener('pointermove', (event) => {
-        if (frame) return;
+document.querySelectorAll('[data-interest]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+        if (!messageField) return;
 
-        frame = requestAnimationFrame(() => {
-            root.style.setProperty('--glow-x', `${event.clientX}px`);
-            root.style.setProperty('--glow-y', `${event.clientY}px`);
+        event.preventDefault();
 
-            cards.forEach((card) => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--card-x', `${event.clientX - rect.left}px`);
-                card.style.setProperty('--card-y', `${event.clientY - rect.top}px`);
-            });
+        const intro = `Hi, I'm interested in a ${button.dataset.interest} for my business. `;
+        if (!messageField.value.trim() || messageField.dataset.prefilled === 'true') {
+            messageField.value = intro;
+            messageField.dataset.prefilled = 'true';
+        }
 
-            frame = null;
-        });
-    }, { passive: true });
-}
+        const goToForm = () => {
+            document.getElementById('contact')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+            document.getElementById('contact-name')?.focus({ preventScroll: true });
+        };
+
+        const dialog = button.closest('.modal');
+        if (dialog) {
+            dialog.addEventListener('hidden.bs.modal', goToForm, { once: true });
+        } else {
+            goToForm();
+        }
+    });
+});
+
+// Once the visitor edits the message, stop replacing it.
+messageField?.addEventListener('input', () => {
+    messageField.dataset.prefilled = 'false';
+});

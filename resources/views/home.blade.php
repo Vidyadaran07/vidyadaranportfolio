@@ -2,10 +2,10 @@
 <x-layouts.app>
 
     @include('sections.hero')
-    @include('sections.about')
-    @include('sections.skills')
+    @include('sections.about') {{-- About and Skills cards side by side --}}
+    @include('sections.experience')
     @include('sections.projects')
-    @include('sections.journey')
-    @include('sections.contact')
+    @include('sections.services')
+    @include('sections.contact') {{-- Resume and Contact cards side by side --}}
 
 </x-layouts.app>

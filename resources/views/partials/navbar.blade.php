@@ -4,12 +4,10 @@
     $sectionUrl = fn (string $id) => $onHome ? "#{$id}" : route('home')."#{$id}";
 @endphp
 
-{{-- Floating glass pill; the wrapper keeps it sticky at the top. --}}
-<div class="site-nav-wrap">
-    <nav class="navbar navbar-expand-lg site-nav" aria-label="Main">
+<nav class="navbar navbar-expand-lg sticky-top site-nav" data-bs-theme="dark" aria-label="Main">
+    <div class="container">
         <a class="navbar-brand" href="{{ $sectionUrl('home') }}">
-            <span class="brand-mark" aria-hidden="true">{ }</span>
-            {{ config('portfolio.name') }}
+            <x-brand-name />
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteMenu"
@@ -26,7 +24,7 @@
                 @endforeach
             </ul>
 
-            <a class="btn btn-primary btn-sm nav-cta" href="{{ $sectionUrl('contact') }}">Hire me</a>
+            <a class="btn btn-primary btn-sm nav-cta" href="{{ $sectionUrl('contact') }}">Hire Me</a>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>

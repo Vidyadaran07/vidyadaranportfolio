@@ -22,34 +22,26 @@ return [
     'email' => env('PORTFOLIO_EMAIL') ?: 'vidyadaran07@gmail.com',
     'github_url' => env('PORTFOLIO_GITHUB_URL') ?: 'https://github.com/VidyadaranM007',
     'linkedin_url' => env('PORTFOLIO_LINKEDIN_URL') ?: 'https://www.linkedin.com/in/vidyadaran-m-a70929375/',
-    'resume_url' => env('PORTFOLIO_RESUME_URL'),
 
-    // Photo shown in the hero, relative to public/. Initials are shown until the file exists.
-    'photo' => 'images/me.jpg',
+    // Resume: a full URL in .env, or a PDF saved at public/resume.pdf. Hidden until one exists.
+    'resume_url' => env('PORTFOLIO_RESUME_URL'),
+    'resume_file' => 'resume.pdf',
+
+    // Photos, relative to public/: a square one for the round hero frame, a 4:5 one for the About card.
+    // The About card falls back to the hero photo, and both show initials until a file exists.
+    'photo' => 'images/profile-hero.webp',
+    'about_photo' => 'images/profile-about.webp',
     'initials' => 'VM',
     'location' => 'India',
-
-    // Status pill in the hero. Set to null to hide it.
-    'availability' => 'Available for freelance work',
+    'availability' => 'Open to freelance work',
 
     /*
     | Hero (first screen of the home page).
-    | The headline is split so the accent word can get its own style.
     */
     'hero' => [
-        'greeting' => "Hi, I'm Vidyadaran",
-        'role' => 'Software Developer · PHP & Laravel',
-        'headline' => ['Building practical', 'software', 'for real businesses.'],
-        'intro' => 'Software Developer with an MCA (2025), focused on backend development with PHP and Laravel, MySQL databases, and API integrations that connect applications and services.',
-    ],
-
-    /*
-    | Big numbers under the hero.
-    */
-    'stats' => [
-        ['value' => '1+', 'label' => 'Year of professional experience'],
-        ['value' => '4', 'label' => 'Business applications developed'],
-        ['value' => 'MCA', 'label' => 'Adhiyamaan College of Engineering, 2025'],
+        'greeting' => "Hello, I'm",
+        'highlights' => ['Laravel', 'PHP', 'REST APIs', 'CRM Systems'],
+        'intro' => 'I build practical web applications, business management systems and API integrations with Laravel, PHP and MySQL.',
     ],
 
     'meta' => [
@@ -62,103 +54,139 @@ return [
     */
     'about' => [
         'paragraphs' => [
-            'I build and improve web applications that help businesses run their daily operations, from customer and lead management to HR, payroll and bookings.',
-            'My work covers PHP and Laravel development, MySQL databases, REST APIs and third-party integrations, plus the frontend that ties it together. I like understanding how a system works as a whole: database design, request handling, user interface and integrations.',
-            'I enjoy solving technical problems and debugging existing systems, and I keep improving my skills. My goal is reliable, maintainable software that solves real problems, and one day, products of my own.',
+            'I am a Software Developer with an MCA (2025) who builds and improves web applications that help businesses run their daily operations, from customer and lead management to HR, payroll and bookings.',
+            'My work covers PHP and Laravel development, MySQL databases, REST APIs and third-party integrations, plus the frontend that ties it together. I enjoy solving technical problems, debugging existing systems and understanding how an application works as a whole.',
         ],
     ],
 
     /*
-    | Logos in the scrolling strip (name => devicon class).
-    */
-    'logos' => [
-        'PHP' => 'devicon-php-plain',
-        'Laravel' => 'devicon-laravel-original',
-        'MySQL' => 'devicon-mysql-original',
-        'JavaScript' => 'devicon-javascript-plain',
-        'HTML' => 'devicon-html5-plain',
-        'CSS' => 'devicon-css3-plain',
-        'Git' => 'devicon-git-plain',
-        'GitHub' => 'devicon-github-original',
-    ],
-
-    /*
-    | Technical skills, grouped.
+    | Technical skills: six tiles.
     */
     'skills' => [
-        ['group' => 'Backend Development', 'icon' => 'bi-server', 'items' => ['PHP', 'Laravel', 'REST API handling', 'API integration', 'Server-side application development']],
-        ['group' => 'Frontend Development', 'icon' => 'bi-window', 'items' => ['HTML', 'CSS', 'JavaScript']],
-        ['group' => 'Database', 'icon' => 'bi-database', 'items' => ['MySQL', 'SQL queries and database operations']],
-        ['group' => 'Development Tools', 'icon' => 'bi-git', 'items' => ['Git', 'GitHub']],
+        ['group' => 'Backend', 'icon' => 'bi-server', 'items' => ['PHP', 'Laravel', 'REST API handling', 'Server-side development']],
+        ['group' => 'Frontend', 'icon' => 'bi-code-slash', 'items' => ['HTML', 'CSS', 'JavaScript']],
+        ['group' => 'Database', 'icon' => 'bi-database', 'items' => ['MySQL', 'SQL queries', 'Database operations']],
+        ['group' => 'Tools', 'icon' => 'bi-git', 'items' => ['Git', 'GitHub']],
+        ['group' => 'CRM & Business Apps', 'icon' => 'bi-diagram-3', 'items' => ['CRM', 'HRM', 'Payroll', 'Seminar hall booking']],
+        ['group' => 'Integrations & More', 'icon' => 'bi-plug', 'items' => ['Third-party API integration', 'Debugging & troubleshooting', 'AI model development (learning)']],
     ],
 
-    // Shown as a full-width strip under the skill cards.
-    'application_areas' => ['CRM', 'HRM', 'Payroll management', 'Seminar hall booking', 'Third-party API integrations', 'AI model development (in progress)'],
-
     /*
-    | Projects: the business applications I developed, then the AI project
-    | I am currently building.
+    | Solutions I can build: sample concepts of business systems, offered to clients.
+    | They are concepts, not delivered client projects, and the site labels them that way.
+    | `slug` names an optional screenshot at public/images/projects/{slug}.png;
+    | until it exists, the card shows the illustrated preview ({slug}-preview.webp).
+    | Timelines are typical estimates for a first version; adjust them to what you can deliver.
     */
     'projects' => [
-        'note' => 'I developed each of these applications, building their features, database operations and user interfaces.',
+        'title' => 'Solutions I Can Build For You',
+        'note' => 'Ready-to-customise business systems, based on the kind of applications I work on as a developer. Pick one and I will build it for your business.',
+        'badge' => 'Sample concept',
 
         'items' => [
             [
+                'slug' => 'crm',
                 'title' => 'Customer Relationship Management (CRM)',
-                'category' => 'Business Management Software',
+                'short_title' => 'CRM System',
+                'category' => 'Sales & Customers',
                 'icon' => 'bi-people',
-                'summary' => 'A CRM application supporting business workflows for customer and lead management.',
+                'summary' => 'Track every lead from first enquiry to closed deal, so your team never misses a follow-up.',
+                'ideal_for' => 'Sales teams, real-estate agencies and service businesses',
+                'timeline' => '4–6 weeks',
                 'stack' => ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'API integrations'],
-                'areas' => [
-                    'Customer and lead management workflows',
-                    'User roles and permission-based functionality',
-                    'Database operations and application maintenance',
-                    'API integration and troubleshooting',
+                'features' => [
+                    'Lead capture and tracking through every sales stage',
+                    'Follow-up reminders and activity history',
+                    'User roles and permissions for your team',
+                    'Reports on leads, conversions and team performance',
+                    'Connects to your website forms and other tools via API',
                 ],
             ],
             [
+                'slug' => 'hrm',
                 'title' => 'Human Resource Management (HRM)',
-                'category' => 'Business Management Software',
+                'short_title' => 'HRM System',
+                'category' => 'People & HR',
                 'icon' => 'bi-person-badge',
-                'summary' => 'An HRM system supporting human resource and employee-related business processes.',
+                'summary' => 'Keep employee records, attendance and leave in one place instead of spreadsheets.',
+                'ideal_for' => 'Growing companies with 10 to 500 employees',
+                'timeline' => '4–6 weeks',
                 'stack' => ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
-                'areas' => [
-                    'Employee information management',
-                    'HR workflow management',
-                    'Employee records and administrative operations',
+                'features' => [
+                    'Employee records and documents in one place',
+                    'Departments, designations and reporting structure',
+                    'Attendance and leave requests with approvals',
+                    'Role-based access for HR, managers and employees',
                 ],
             ],
             [
+                'slug' => 'payroll',
                 'title' => 'Payroll Management System',
-                'category' => 'Business Management Software',
+                'short_title' => 'Payroll System',
+                'category' => 'Finance & Payroll',
                 'icon' => 'bi-cash-stack',
-                'summary' => 'A payroll management application supporting payroll-related operations.',
+                'summary' => 'Run monthly payroll and generate payslips in a few clicks, with clear records.',
+                'ideal_for' => 'Businesses that run monthly payroll in-house',
+                'timeline' => '3–5 weeks',
                 'stack' => ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
-                'areas' => [
-                    'Employee payroll information',
-                    'Payroll records and reporting',
+                'features' => [
+                    'Salary structures with earnings and deductions',
+                    'Monthly payroll runs and payslip generation',
+                    'Payroll records and reports',
+                    'Works together with HRM employee data',
                 ],
             ],
             [
+                'slug' => 'seminar-hall',
                 'title' => 'Seminar Hall Booking System',
-                'category' => 'Booking and Reservation Software',
+                'short_title' => 'Seminar Hall Booking',
+                'category' => 'Bookings & Reservations',
                 'icon' => 'bi-calendar-check',
-                'summary' => 'An application supporting seminar hall booking and reservation workflows.',
+                'summary' => 'Let people book halls online and stop double bookings, with approvals built in.',
+                'ideal_for' => 'Colleges, training institutes and offices with shared halls',
+                'timeline' => '2–4 weeks',
                 'stack' => ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
-                'areas' => [
-                    'Seminar hall information management',
-                    'Booking requests and reservation workflows',
-                    'Booking status and administrative management',
+                'features' => [
+                    'Hall details, capacity and facilities',
+                    'Online booking requests with date and time slots',
+                    'Approval workflow and booking status',
+                    'Booking history and availability overview',
                 ],
             ],
+            [
+                'slug' => 'ai-model',
+                'title' => 'AI Model Development',
+                'short_title' => 'AI Model Development',
+                'category' => 'Currently Learning',
+                'icon' => 'bi-cpu',
+                'status' => 'In progress',
+                'summary' => 'I am working on AI model creation to explore how intelligent systems can be developed and incorporated into software applications.',
+                'ideal_for' => null,
+                'timeline' => null,
+                'stack' => [],
+                'features' => [],
+            ],
         ],
+    ],
 
-        // Shown as a full-width "currently building" banner under the cards.
-        'current' => [
-            'title' => 'AI Model Development',
-            'status' => 'In progress',
-            'summary' => 'I am working on AI model creation to explore how intelligent systems can be developed and incorporated into software applications.',
-        ],
+    /*
+    | How a project works, shown under the services.
+    */
+    'process' => [
+        ['title' => 'Discuss', 'icon' => 'bi-chat-dots', 'text' => 'A free call to understand your business and what the system needs to do.'],
+        ['title' => 'Plan', 'icon' => 'bi-clipboard-check', 'text' => 'A clear list of features, timeline and cost before any work starts.'],
+        ['title' => 'Build', 'icon' => 'bi-code-slash', 'text' => 'Regular updates and demos so you see progress every week.'],
+        ['title' => 'Deliver & Support', 'icon' => 'bi-rocket-takeoff', 'text' => 'Launch, training for your team, and help after delivery.'],
+    ],
+
+    /*
+    | Services I offer.
+    */
+    'services' => [
+        ['title' => 'Laravel Web Applications', 'icon' => 'bi-code-square', 'text' => 'Custom web applications built with PHP and Laravel, from database design to a clean, responsive interface.'],
+        ['title' => 'CRM / HRM / Payroll Systems', 'icon' => 'bi-diagram-3', 'text' => 'Business management software for customers, leads, employees, payroll and bookings.'],
+        ['title' => 'API Integration', 'icon' => 'bi-plug', 'text' => 'Connecting your application with REST APIs and third-party services, and fixing integrations that break.'],
+        ['title' => 'Bug Fixing & Maintenance', 'icon' => 'bi-bug', 'text' => 'Debugging, troubleshooting and improving existing PHP and Laravel systems.'],
     ],
 
     /*
@@ -168,7 +196,7 @@ return [
         [
             'role' => 'Software Developer',
             'company' => 'Turing Code Technologies',
-            'duration' => 'About 1 year',
+            'duration' => 'About 1 year · Present',
             'summary' => 'Developing, maintaining, and improving web applications using PHP and related web technologies.',
             'points' => [
                 'Backend application development',
@@ -194,19 +222,12 @@ return [
     ],
 
     /*
-    | Career objective (shown as Now / Next / Long term in the closing card).
+    | Career objective (shown in the Resume card).
     */
-    'objective' => [
-        'paragraphs' => [
-            'My objective is to grow as a Software Developer by strengthening my backend development skills, improving my understanding of software architecture, and building reliable applications.',
-            'I am interested in opportunities where I can contribute to real-world software projects, work with experienced developers, solve technical challenges, and continue learning modern development practices.',
-            'In the long term, I aspire to build my own technology-driven products and business solutions.',
-        ],
-    ],
+    'objective' => 'I want to grow as a Software Developer by strengthening my backend skills and understanding of software architecture, and in the long term build my own technology-driven products.',
 
     'contact' => [
-        'intro' => 'I am interested in connecting with developers, technology professionals, and people working on meaningful software projects.',
-        'closing' => "Let's connect and build useful technology together.",
+        'intro' => 'Have a project in mind or want to work together? Send me a message and I will get back to you.',
     ],
 
     /*
@@ -216,14 +237,15 @@ return [
         'home' => 'Home',
         'about' => 'About',
         'skills' => 'Skills',
-        'projects' => 'Projects',
-        'journey' => 'Journey',
+        'experience' => 'Experience',
+        'projects' => 'Solutions',
+        'services' => 'Services',
         'contact' => 'Contact',
     ],
 
     /*
     | Sections linked from the footer.
     */
-    'footer_nav' => ['about', 'skills', 'projects', 'journey', 'contact'],
+    'footer_nav' => ['home', 'about', 'projects', 'services', 'contact'],
 
 ];

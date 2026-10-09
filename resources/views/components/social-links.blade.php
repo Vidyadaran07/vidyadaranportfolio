@@ -1,5 +1,5 @@
 {{--
-    GitHub, LinkedIn and Email links, used in the hero, footer and contact section.
+    GitHub, LinkedIn and Email as round icon buttons, plus the resume when one exists.
     A missing value shows a placeholder on your machine and is hidden on the live site.
 --}}
 @php
@@ -10,21 +10,24 @@
         ['label' => 'LinkedIn', 'icon' => 'bi-linkedin', 'url' => config('portfolio.linkedin_url'), 'placeholder' => 'YOUR_LINKEDIN_URL'],
         ['label' => 'Email', 'icon' => 'bi-envelope', 'url' => $email ? "mailto:{$email}" : null, 'placeholder' => 'YOUR_EMAIL'],
     ];
+
+    if ($resumeUrl) {
+        $links[] = ['label' => 'Download resume', 'icon' => 'bi-download', 'url' => $resumeUrl, 'placeholder' => null];
+    }
 @endphp
 
 <ul {{ $attributes->merge(['class' => 'social-links']) }}>
     @foreach ($links as $link)
         @if ($link['url'])
             <li>
-                <a href="{{ $link['url'] }}" @unless (str_starts_with($link['url'], 'mailto:')) target="_blank" rel="noopener" @endunless>
+                <a href="{{ $link['url'] }}" aria-label="{{ $link['label'] }}" title="{{ $link['label'] }}"
+                   @unless (str_starts_with($link['url'], 'mailto:')) target="_blank" rel="noopener" @endunless>
                     <i class="bi {{ $link['icon'] }}" aria-hidden="true"></i>
-                    <span>{{ $link['label'] }}</span>
                 </a>
             </li>
         @elseif (app()->isLocal())
-            <li>
+            <li class="social-placeholder">
                 <i class="bi {{ $link['icon'] }}" aria-hidden="true"></i>
-                <span>{{ $link['label'] }}</span>
                 <span class="placeholder-value">{{ $link['placeholder'] }}</span>
             </li>
         @endif
