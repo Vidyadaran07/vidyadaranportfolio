@@ -1,175 +1,57 @@
 // -----------------------------------------------------------------------------
-// Hero section and its system diagram.
+// Site footer.
 // -----------------------------------------------------------------------------
 
-.hero {
-  background-color: $vm-night;
-  color: $white;
-  padding-block: 4rem 5rem;
-
-  @include media-breakpoint-up(lg) {
-    padding-block: 7rem 7.5rem;
-  }
-}
-
-.hero-heading {
-  color: $white;
-  font-size: clamp(2.625rem, 1.25rem + 5vw, 4.75rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.04em;
-  margin-bottom: 0;
-}
-
-.hero-lead {
-  color: #C9CED6;
-  font-size: clamp(1.625rem, 1.1rem + 2vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -.03em;
-  max-width: 17ch;
-  margin-top: 1.125rem;
-  margin-bottom: 0;
-}
-
-.hero-intro {
+.site-footer {
   color: $vm-soft;
-  font-size: 1.125rem;
-  max-width: 52ch;
-  margin-top: 1.75rem;
+  font-size: .9375rem;
+  padding-block: 4rem 2rem;
+  border-top: 1px solid $vm-night-line;
+}
+
+.footer-name {
+  color: $white;
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  margin-bottom: .25rem;
+}
+
+.footer-tagline {
+  max-width: 40ch;
+  margin-top: 1rem;
   margin-bottom: 0;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .875rem;
-  margin-top: 2.5rem;
-
-  // Full-width, easy-to-tap buttons on phones
-  @include media-breakpoint-down(sm) {
-    flex-direction: column;
-  }
+.footer-heading {
+  color: $vm-white;
+  font-family: $font-family-monospace;
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
-// Secondary button on dark backgrounds
-.btn-ghost-dark {
-  --bs-btn-color: #{$white};
-  --bs-btn-border-color: #3A3F48;
-  --bs-btn-hover-color: #{$white};
-  --bs-btn-hover-bg: #{$vm-night-2};
-  --bs-btn-hover-border-color: #{$vm-soft};
-  --bs-btn-active-color: #{$white};
-  --bs-btn-active-bg: #{$vm-night-2};
-  --bs-btn-active-border-color: #{$vm-soft};
-}
-
-// Social links (shared component); hero variant
-.social-links {
+.footer-links {
   list-style: none;
   padding: 0;
   margin: 0;
-
-  li {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: .5rem;
-  }
+  display: grid;
+  gap: .625rem;
 
   a {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-  }
-}
-
-.hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem 1.75rem;
-  margin-top: 2.25rem;
-  font-size: .9375rem;
-  color: $vm-soft;
-
-  a {
-    color: #E6E8EB;
+    color: $vm-text;
 
     &:hover {
       color: $white;
-      text-decoration: none;
     }
   }
 }
 
-// System diagram
-.system-diagram {
-  background-color: $vm-night-2;
-  border: 1px solid $vm-night-line;
-  border-radius: $border-radius-lg + .125rem;
-  padding: 1.75rem 1.75rem 1.375rem;
-  margin: 0;
-
-  svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  // Wide drawing from 576px up, compact drawing on phones
-  .diagram-compact {
-    display: none;
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 1rem 1rem .875rem;
-
-    .diagram-wide {
-      display: none;
-    }
-
-    .diagram-compact {
-      display: block;
-    }
-  }
-
-  .node      { fill: #1E2229; stroke: #30353D; }
-  .node-core { fill: #11332F; stroke: $vm-teal; }
-  .label     { font-family: $font-family-monospace; font-size: 13px; fill: #C9CED6; }
-  .sublabel  { font-family: $font-family-monospace; font-size: 11px; fill: #7E858F; }
-  .title     { font-family: $font-family-sans-serif; font-size: 17px; font-weight: 600; fill: $white; }
-  .link      { fill: none; stroke: #3A4049; stroke-width: 1.5; }
-  .link-main { stroke: $vm-teal; }
-  .packet    { fill: $vm-teal-bright; }
-
-  figcaption {
-    color: #8B929C;
-    font-size: .875rem;
-    line-height: 1.55;
-    margin-top: .875rem;
-    padding-top: .875rem;
-    border-top: 1px solid $vm-night-line;
-  }
-
-  // The one load animation on the page: connections draw in once.
-  @media (prefers-reduced-motion: no-preference) {
-    .link {
-      stroke-dasharray: 260;
-      stroke-dashoffset: 260;
-      animation: diagram-draw 1.1s ease-out .25s forwards;
-    }
-
-    .packet {
-      opacity: 0;
-      animation: diagram-fade .4s ease-out 1.2s forwards;
-    }
-  }
-}
-
-@keyframes diagram-draw {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes diagram-fade {
-  to { opacity: 1; }
+.footer-base {
+  border-top: 1px solid $vm-night-line;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  font-size: .8125rem;
 }

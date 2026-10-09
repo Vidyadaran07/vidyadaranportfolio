@@ -1,19 +1,50 @@
 // -----------------------------------------------------------------------------
-// Base styles shared by every page.
+// Base styles shared by every page: background, typography helpers,
+// section headers, pills, chips, scroll reveal.
 // -----------------------------------------------------------------------------
 
 html {
-  scroll-padding-top: $vm-nav-height; // anchors land below the sticky navbar
+  scroll-padding-top: $vm-nav-height; // anchors land below the floating navbar
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  position: relative;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
   letter-spacing: -.025em;
+}
+
+::selection {
+  background: rgba($vm-teal-bright, .35);
+  color: $white;
+}
+
+// Page background: faint grid that fades out towards the bottom of the hero
+.page-grid {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 110vh;
+  z-index: -2;
+  background-image:
+    linear-gradient(to right, rgba($white, .035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba($white, .035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+// Soft teal glow that follows the mouse (position set in app.js)
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(600px circle at var(--glow-x, 50%) var(--glow-y, -20%), rgba($vm-teal-bright, .07), transparent 40%);
 }
 
 // Skip link: hidden until focused with the keyboard
@@ -25,7 +56,7 @@ h1, h2, h3, h4 {
   padding: .5rem 1rem;
   border-radius: $border-radius;
   background: $white;
-  color: $vm-ink;
+  color: $vm-night;
   font-weight: 600;
 }
 
@@ -40,30 +71,91 @@ h1, h2, h3, h4 {
   padding-block: 5rem;
 
   @include media-breakpoint-up(lg) {
-    padding-block: 7.5rem;
+    padding-block: 7rem;
   }
 }
 
-.section-alt {
-  background-color: $vm-mist;
-}
-
-.section-dark {
-  --bs-heading-color: #{$white};
-  background-color: $vm-night;
-  color: $white;
+.section-head {
+  max-width: 44rem;
+  margin-bottom: 3rem;
 }
 
 .section-title {
-  font-size: clamp(2rem, 1.4rem + 2.2vw, 2.75rem);
-  margin-bottom: 0;
+  font-size: clamp(2.125rem, 1.4rem + 2.6vw, 3.25rem);
+  letter-spacing: -.035em;
+  margin: 1rem 0 0;
 }
 
 .lede {
-  color: $vm-slate;
-  font-size: 1.1875rem;
+  color: $vm-soft;
+  font-size: 1.125rem;
   max-width: 60ch;
   margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+// Accent word: italic serif with a teal gradient
+.accent {
+  font-family: $vm-font-serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  padding-right: .06em; // italic overhang
+  background: linear-gradient(100deg, $vm-teal-bright, $vm-teal-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// Pill label above section titles
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: $font-family-monospace;
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: $vm-teal-bright;
+  padding: .375rem .875rem;
+  border: 1px solid rgba($vm-teal-bright, .3);
+  border-radius: 999px;
+  background: rgba($vm-teal-bright, .06);
+}
+
+// Status pill with a pulsing dot
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  font-size: .875rem;
+  color: $vm-white;
+  padding: .375rem 1rem .375rem .75rem;
+  border: 1px solid $vm-night-line-2;
+  border-radius: 999px;
+  background: rgba($vm-night-2, .8);
+}
+
+.status-dot {
+  position: relative;
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: $vm-green;
+  flex-shrink: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: $vm-green;
+    animation: status-ping 1.8s cubic-bezier(0, 0, .2, 1) infinite;
+  }
+}
+
+@keyframes status-ping {
+  75%, 100% { transform: scale(2.6); opacity: 0; }
 }
 
 // Monospace technology tag
@@ -72,22 +164,112 @@ h1, h2, h3, h4 {
   font-family: $font-family-monospace;
   font-size: .8125rem;
   line-height: 1.4;
-  padding: .3rem .625rem;
-  border: 1px solid $vm-line;
-  border-radius: $border-radius-sm;
-  background: $vm-mist;
-  color: $vm-ink;
-  white-space: nowrap;
+  padding: .3rem .7rem;
+  border: 1px solid $vm-night-line-2;
+  border-radius: 999px;
+  background: $vm-night-3;
+  color: $vm-text;
 }
 
-// Highlights values that still need real content (YOUR_EMAIL, START_DATE…)
+.chip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+// Shared dark card surface
+.surface {
+  position: relative;
+  background: linear-gradient(180deg, rgba($white, .025), rgba($white, 0)) , $vm-night-2;
+  border: 1px solid $vm-night-line;
+  border-radius: $border-radius-xl;
+}
+
+// Primary button with a subtle shine on hover
+.btn-primary {
+  --bs-btn-hover-bg: #0E948D;
+  --bs-btn-hover-border-color: #0E948D;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba($vm-teal-glow, .25) inset, 0 8px 24px -8px rgba($vm-teal-bright, .55);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba($white, .25) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .6s ease;
+  }
+
+  &:hover::after {
+    transform: translateX(120%);
+  }
+}
+
+// Secondary button on dark backgrounds
+.btn-ghost-dark {
+  --bs-btn-color: #{$vm-white};
+  --bs-btn-border-color: #{$vm-night-line-2};
+  --bs-btn-hover-color: #{$white};
+  --bs-btn-hover-bg: #{$vm-night-3};
+  --bs-btn-hover-border-color: #{$vm-soft};
+  --bs-btn-active-color: #{$white};
+  --bs-btn-active-bg: #{$vm-night-3};
+  --bs-btn-active-border-color: #{$vm-soft};
+}
+
+// Social links (shared component)
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: $vm-text;
+    transition: color .15s ease;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+// Highlights values that still need real content
 .placeholder-value {
   font-family: $font-family-monospace;
   font-size: .875em;
   padding: .05rem .375rem;
   border-radius: .25rem;
-  background: $vm-teal-wash;
-  color: $vm-teal;
+  background: rgba($vm-teal-bright, .15);
+  color: $vm-teal-glow;
+}
+
+// Scroll reveal: elements fade and slide in once (class added by app.js).
+// Only hidden when JS is running, so the page still works without it.
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+  transition-delay: var(--reveal-delay, 0s);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 // Respect reduced-motion preferences
@@ -99,5 +281,14 @@ h1, h2, h3, h4 {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor-glow {
+    display: none;
   }
 }

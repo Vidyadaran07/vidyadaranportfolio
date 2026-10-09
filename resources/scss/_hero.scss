@@ -1,41 +1,73 @@
 // -----------------------------------------------------------------------------
-// Hero section and its system diagram.
+// Hero section, stats strip and the system diagram.
 // -----------------------------------------------------------------------------
 
 .hero {
-  background-color: $vm-night;
-  color: $white;
-  padding-block: 4rem 5rem;
+  padding-block: 3.5rem 4rem;
 
   @include media-breakpoint-up(lg) {
-    padding-block: 7rem 7.5rem;
+    padding-block: 6rem 5rem;
   }
 }
 
-.hero-heading {
-  color: $white;
-  font-size: clamp(2.625rem, 1.25rem + 5vw, 4.75rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.04em;
-  margin-bottom: 0;
+.hero-intro-row {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  margin-top: 2rem;
 }
 
-.hero-lead {
-  color: #C9CED6;
-  font-size: clamp(1.625rem, 1.1rem + 2vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -.03em;
-  max-width: 17ch;
-  margin-top: 1.125rem;
-  margin-bottom: 0;
+// Round photo, or initials until a photo is added
+.avatar {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba($vm-teal-bright, .5);
+  box-shadow: 0 0 0 4px rgba($vm-teal-bright, .1);
+}
+
+.avatar-initials {
+  display: grid;
+  place-items: center;
+  font-family: $font-family-monospace;
+  font-weight: 600;
+  font-size: .9375rem;
+  color: $vm-teal-glow;
+  background: linear-gradient(135deg, #12302D, $vm-night-2);
+}
+
+.hero-greeting {
+  color: $vm-white;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hero-role {
+  display: block;
+  color: $vm-soft;
+  font-size: .875rem;
+  font-weight: 400;
+}
+
+.hero-heading {
+  color: $vm-white;
+  font-size: clamp(2.75rem, 1.2rem + 5.6vw, 5.25rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -.045em;
+  margin: 1.75rem 0 0;
+
+  .accent {
+    font-size: 1.08em;
+  }
 }
 
 .hero-intro {
   color: $vm-soft;
   font-size: 1.125rem;
-  max-width: 52ch;
+  max-width: 50ch;
   margin-top: 1.75rem;
   margin-bottom: 0;
 }
@@ -44,43 +76,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: .875rem;
-  margin-top: 2.5rem;
+  margin-top: 2.25rem;
 
-  // Full-width, easy-to-tap buttons on phones
   @include media-breakpoint-down(sm) {
     flex-direction: column;
-  }
-}
-
-// Secondary button on dark backgrounds
-.btn-ghost-dark {
-  --bs-btn-color: #{$white};
-  --bs-btn-border-color: #3A3F48;
-  --bs-btn-hover-color: #{$white};
-  --bs-btn-hover-bg: #{$vm-night-2};
-  --bs-btn-hover-border-color: #{$vm-soft};
-  --bs-btn-active-color: #{$white};
-  --bs-btn-active-bg: #{$vm-night-2};
-  --bs-btn-active-border-color: #{$vm-soft};
-}
-
-// Social links (shared component); hero variant
-.social-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: .5rem;
-  }
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
   }
 }
 
@@ -88,27 +87,59 @@
   display: flex;
   flex-wrap: wrap;
   gap: .75rem 1.75rem;
-  margin-top: 2.25rem;
+  margin-top: 2rem;
   font-size: .9375rem;
-  color: $vm-soft;
+}
 
-  a {
-    color: #E6E8EB;
+// Stats strip
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4.5rem;
+  border-top: 1px solid $vm-night-line;
+  border-bottom: 1px solid $vm-night-line;
 
-    &:hover {
-      color: $white;
-      text-decoration: none;
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat {
+  padding: 1.75rem 1.5rem;
+
+  & + & {
+    border-left: 1px solid $vm-night-line;
+
+    @include media-breakpoint-down(md) {
+      border-left: 0;
+      border-top: 1px solid $vm-night-line;
     }
   }
+
+  @include media-breakpoint-down(md) {
+    padding-inline: 0;
+  }
+}
+
+.stat-value {
+  font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: $vm-white;
+}
+
+.stat-label {
+  color: $vm-soft;
+  font-size: .9375rem;
+  margin-top: .625rem;
 }
 
 // System diagram
 .system-diagram {
-  background-color: $vm-night-2;
-  border: 1px solid $vm-night-line;
-  border-radius: $border-radius-lg + .125rem;
   padding: 1.75rem 1.75rem 1.375rem;
   margin: 0;
+  box-shadow: 0 30px 80px -30px rgba($vm-teal-bright, .25);
 
   svg {
     display: block;
@@ -133,17 +164,17 @@
     }
   }
 
-  .node      { fill: #1E2229; stroke: #30353D; }
-  .node-core { fill: #11332F; stroke: $vm-teal; }
+  .node      { fill: #161A21; stroke: #2A303A; }
+  .node-core { fill: #0F2B28; stroke: $vm-teal-bright; }
   .label     { font-family: $font-family-monospace; font-size: 13px; fill: #C9CED6; }
   .sublabel  { font-family: $font-family-monospace; font-size: 11px; fill: #7E858F; }
   .title     { font-family: $font-family-sans-serif; font-size: 17px; font-weight: 600; fill: $white; }
-  .link      { fill: none; stroke: #3A4049; stroke-width: 1.5; }
+  .link      { fill: none; stroke: #2F3640; stroke-width: 1.5; }
   .link-main { stroke: $vm-teal; }
-  .packet    { fill: $vm-teal-bright; }
+  .packet    { fill: $vm-teal-glow; }
 
   figcaption {
-    color: #8B929C;
+    color: $vm-dim;
     font-size: .875rem;
     line-height: 1.55;
     margin-top: .875rem;
@@ -151,7 +182,7 @@
     border-top: 1px solid $vm-night-line;
   }
 
-  // The one load animation on the page: connections draw in once.
+  // Connections draw in once, then data packets keep flowing.
   @media (prefers-reduced-motion: no-preference) {
     .link {
       stroke-dasharray: 260;
@@ -162,6 +193,13 @@
     .packet {
       opacity: 0;
       animation: diagram-fade .4s ease-out 1.2s forwards;
+    }
+  }
+
+  // Packets sit still when motion is reduced
+  @media (prefers-reduced-motion: reduce) {
+    .packet-flow {
+      display: none;
     }
   }
 }
