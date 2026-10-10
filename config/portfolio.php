@@ -23,9 +23,6 @@ return [
     'github_url' => env('PORTFOLIO_GITHUB_URL') ?: 'https://github.com/VidyadaranM007',
     'linkedin_url' => env('PORTFOLIO_LINKEDIN_URL') ?: 'https://www.linkedin.com/in/vidyadaran-m-a70929375/',
 
-    // Resume: a full URL in .env, or a PDF saved at public/resume.pdf. Hidden until one exists.
-    'resume_url' => env('PORTFOLIO_RESUME_URL'),
-    'resume_file' => 'resume.pdf',
 
     // Photos, relative to public/: a square one for the round hero frame, a 4:5 one for the About card.
     // The About card falls back to the hero photo, and both show initials until a file exists.
@@ -33,7 +30,8 @@ return [
     'about_photo' => 'images/profile-about.webp',
     'initials' => 'VM',
     'location' => 'India',
-    'availability' => 'Open to freelance work',
+    'availability' => 'Available for new projects',
+    'total_experience' => '2 years',
 
     /*
     | Hero (first screen of the home page).
@@ -45,8 +43,8 @@ return [
     ],
 
     'meta' => [
-        'title' => 'Vidyadaran M | Software Developer, PHP & Laravel',
-        'description' => 'Portfolio of Vidyadaran M, a Software Developer building web applications, business management systems and API integrations with PHP, Laravel and MySQL.',
+        'title' => 'Vidyadaran M | Laravel Developer for Business Software',
+        'description' => 'Vidyadaran M builds custom CRM, HRM, payroll and booking systems, web applications and API integrations for businesses, with PHP, Laravel and MySQL.',
     ],
 
     /*
@@ -54,8 +52,8 @@ return [
     */
     'about' => [
         'paragraphs' => [
-            'I am a Software Developer with an MCA (2025) who builds and improves web applications that help businesses run their daily operations, from customer and lead management to HR, payroll and bookings.',
-            'My work covers PHP and Laravel development, MySQL databases, REST APIs and third-party integrations, plus the frontend that ties it together. I enjoy solving technical problems, debugging existing systems and understanding how an application works as a whole.',
+            'I am a Software Developer who builds web applications that help businesses run their daily operations, from customer and lead management to HR, payroll and bookings.',
+            'I handle the whole system for you: PHP and Laravel development, MySQL databases, REST APIs, third-party integrations and the frontend your team uses. I can also take over an existing system to fix bugs and add new features.',
         ],
     ],
 
@@ -68,7 +66,7 @@ return [
         ['group' => 'Database', 'icon' => 'bi-database', 'items' => ['MySQL', 'SQL queries', 'Database operations']],
         ['group' => 'Tools', 'icon' => 'bi-git', 'items' => ['Git', 'GitHub']],
         ['group' => 'CRM & Business Apps', 'icon' => 'bi-diagram-3', 'items' => ['CRM', 'HRM', 'Payroll', 'Seminar hall booking']],
-        ['group' => 'Integrations & More', 'icon' => 'bi-plug', 'items' => ['Third-party API integration', 'Debugging & troubleshooting', 'AI model development (learning)']],
+        ['group' => 'Integrations & More', 'icon' => 'bi-plug', 'items' => ['Third-party API integration', 'Payment & SMS gateways', 'Debugging & troubleshooting']],
     ],
 
     /*
@@ -154,16 +152,17 @@ return [
                 ],
             ],
             [
+                // Upcoming: no features yet, so the card shows "Coming soon" and an "Ask about this" button.
                 'slug' => 'ai-model',
-                'title' => 'AI Model Development',
-                'short_title' => 'AI Model Development',
-                'category' => 'Currently Learning',
-                'icon' => 'bi-cpu',
-                'status' => 'In progress',
-                'summary' => 'I am working on AI model creation to explore how intelligent systems can be developed and incorporated into software applications.',
+                'title' => 'AI Model Service',
+                'short_title' => 'AI Model Service',
+                'category' => 'Upcoming Project',
+                'icon' => 'bi-stars',
+                'status' => 'Coming soon',
+                'summary' => 'An AI assistant trained on your own business data, answering questions, predicting which leads will convert and drafting follow-ups for your team.',
                 'ideal_for' => null,
                 'timeline' => null,
-                'stack' => [],
+                'stack' => ['Laravel', 'Python', 'AI APIs'],
                 'features' => [],
             ],
         ],
@@ -196,7 +195,23 @@ return [
         [
             'role' => 'Software Developer',
             'company' => 'Turing Code Technologies',
-            'duration' => 'About 1 year · Present',
+            'duration' => '2025 · Present',
+            'summary' => 'Building and maintaining a large property-management and real-estate CRM platform on Laravel and MySQL, used by admins, owners, tenants and vendors.',
+            'points' => [
+                'AI calling module: owner-lead pooling, lead assignment, campaigns and call recordings',
+                'Attendance module: dashboard filters, late-arrival and leave reports, working-hours tracking',
+                'WhatsApp and SMS gateway integration, including message templates and lead handling rules',
+                'Tenant settlement, e-sign, inspection and admin approval workflows',
+                'Property search by category, advanced search and user filters',
+                'REST APIs with Passport and Sanctum, role-based access with Spatie Permission',
+                'Third-party integrations: Google APIs, payment gateway and cloud file storage',
+                'Debugging and fixing production issues through Git pull requests',
+            ],
+        ],
+        [
+            'role' => 'Software Developer',
+            'company' => 'WMP Create Agency',
+            'duration' => '2024 · 2025 (1 year)',
             'summary' => 'Developing, maintaining, and improving web applications using PHP and related web technologies.',
             'points' => [
                 'Backend application development',
@@ -210,21 +225,53 @@ return [
     ],
 
     /*
-    | Education
+    | Real projects from my jobs, shown after the experience timeline.
+    | Client and product names are left out on purpose.
     */
-    'education' => [
-        [
-            'degree' => 'Master of Computer Applications (MCA)',
-            'institution' => 'Adhiyamaan College of Engineering',
-            'year' => '2025',
-            'summary' => 'My postgraduate education provided the academic foundation for my continued development in software engineering and application development.',
+    'work' => [
+        'title' => "Projects I've Worked On",
+        'note' => 'Real systems I have built and maintain, running in production for businesses today.',
+
+        'items' => [
+            [
+                'title' => 'Property Management & Real-Estate CRM',
+                'icon' => 'bi-buildings',
+                'text' => 'A large platform used by admins, property owners, tenants and vendors to manage leads, properties, tenancies and payments.',
+                'stack' => ['Laravel', 'MySQL', 'REST APIs', 'Role-based access'],
+            ],
+            [
+                'title' => 'AI Calling & Lead Automation',
+                'icon' => 'bi-telephone-outbound',
+                'text' => 'Automated calling to property owners, with source-based lead pooling, lead assignment, calling campaigns and call recordings.',
+                'stack' => ['Laravel', 'Voice AI API', 'Queues'],
+            ],
+            [
+                'title' => 'Attendance & HR Reports',
+                'icon' => 'bi-calendar2-week',
+                'text' => 'Attendance dashboard with filters, late-arrival and leave reports, department search and working-hours tracking.',
+                'stack' => ['Laravel', 'MySQL', 'JavaScript'],
+            ],
+            [
+                'title' => 'Tenant Settlement & E-Sign',
+                'icon' => 'bi-file-earmark-check',
+                'text' => 'Move-out settlement, property inspection, digital agreement signing and admin approval workflows.',
+                'stack' => ['Laravel', 'PDF generation', 'Workflows'],
+            ],
         ],
     ],
 
     /*
-    | Career objective (shown in the Resume card).
+    | "Why work with me" card next to the contact form.
     */
-    'objective' => 'I want to grow as a Software Developer by strengthening my backend skills and understanding of software architecture, and in the long term build my own technology-driven products.',
+    'why' => [
+        'title' => 'Why Work With Me',
+        'points' => [
+            '2 years building business software used in production every day',
+            'You talk directly to the developer, with no middlemen',
+            'Clean Laravel code that you fully own',
+            'Support and fixes after your system goes live',
+        ],
+    ],
 
     'contact' => [
         'intro' => 'Have a project in mind or want to work together? Send me a message and I will get back to you.',

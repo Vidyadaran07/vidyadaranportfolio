@@ -18,7 +18,8 @@ class HomePageTest extends TestCase
 
         $response->assertSee(config('portfolio.name'));
         $response->assertSee('Turing Code Technologies');
-        $response->assertSee('Adhiyamaan College of Engineering');
+        $response->assertSee('WMP Create Agency');
+        $response->assertSee(config('portfolio.total_experience'));
     }
 
     public function test_every_project_is_listed(): void
@@ -27,6 +28,17 @@ class HomePageTest extends TestCase
 
         foreach (config('portfolio.projects.items') as $project) {
             $response->assertSee($project['short_title']);
+        }
+    }
+
+    public function test_real_work_projects_are_listed(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertSee('id="work"', false);
+
+        foreach (config('portfolio.work.items') as $item) {
+            $response->assertSee($item['title']);
         }
     }
 
@@ -67,7 +79,10 @@ class HomePageTest extends TestCase
 
         foreach (config('portfolio.projects.items') as $project) {
             if (empty($project['features'])) {
-                $response->assertDontSee('data-interest="'.$project['short_title'].'"', false);
+                // Upcoming: an "Ask about this" button, but no details dialog.
+                $response->assertSee('data-interest="'.$project['short_title'].'"', false)
+                    ->assertSee($project['status'])
+                    ->assertDontSee('id="project-'.$project['slug'].'"', false);
 
                 continue;
             }
@@ -112,15 +127,16 @@ class HomePageTest extends TestCase
         }
     }
 
-    public function test_resume_button_only_shows_when_a_resume_exists(): void
+    public function test_why_work_with_me_replaces_job_seeker_content(): void
     {
-        config(['portfolio.resume_url' => null, 'portfolio.resume_file' => 'missing-resume.pdf']);
-        $this->get('/')->assertDontSee('Download Resume');
+        $response = $this->get('/');
 
-        config(['portfolio.resume_url' => 'https://example.com/resume.pdf']);
-        $this->get('/')
-            ->assertSee('Download Resume')
-            ->assertSee('https://example.com/resume.pdf', false);
+        foreach (config('portfolio.why.points') as $point) {
+            $response->assertSee($point);
+        }
+
+        $response->assertDontSee('Career Objective')
+            ->assertDontSee('Download Resume');
     }
 
     public function test_contact_links_are_present(): void

@@ -104,7 +104,9 @@ document.querySelectorAll('[data-interest]').forEach((button) => {
 
         event.preventDefault();
 
-        const intro = `Hi, I'm interested in a ${button.dataset.interest} for my business. `;
+        const interest = button.dataset.interest;
+        const article = /^[aeiou]/i.test(interest) ? 'an' : 'a';
+        const intro = `Hi, I'm interested in ${article} ${interest} for my business. `;
         if (!messageField.value.trim() || messageField.dataset.prefilled === 'true') {
             messageField.value = intro;
             messageField.dataset.prefilled = 'true';

@@ -1,30 +1,25 @@
-{{-- Resume card next to the Contact card (details + message form). --}}
+{{-- "Why work with me" card next to the Contact card (details + message form). --}}
 @php
     $email = config('portfolio.email');
     $linkedin = config('portfolio.linkedin_url');
+    $why = config('portfolio.why');
 @endphp
 
-<section id="contact" class="section" aria-label="Resume and contact">
+<section id="contact" class="section" aria-label="Why work with me and contact">
     <div class="container">
         <div class="row g-4">
 
             <div class="col-lg-4">
-                <article class="card-panel resume-card" data-reveal>
-                    <span class="icon-box" aria-hidden="true"><i class="bi bi-file-earmark-person"></i></span>
-                    @if ($resumeUrl)
-                        <h2>Resume</h2>
-                        <p>Download my resume to learn more about my experience, skills and projects.</p>
-                    @else
-                        <h2>Career Objective</h2>
-                        <p>{{ config('portfolio.objective') }}</p>
-                    @endif
+                <article class="card-panel why-card" data-reveal>
+                    <span class="icon-box" aria-hidden="true"><i class="bi bi-patch-check"></i></span>
+                    <h2>{{ $why['title'] }}</h2>
+                    <ul class="dot-list">
+                        @foreach ($why['points'] as $point)
+                            <li>{{ $point }}</li>
+                        @endforeach
+                    </ul>
 
-                    <div class="resume-actions">
-                        @if ($resumeUrl)
-                            <a class="btn btn-primary" href="{{ $resumeUrl }}" target="_blank" rel="noopener">
-                                <i class="bi bi-download me-2" aria-hidden="true"></i>Download Resume
-                            </a>
-                        @endif
+                    <div class="why-actions">
                         @if ($linkedin)
                             <a class="btn btn-outline-ink" href="{{ $linkedin }}" target="_blank" rel="noopener">
                                 <i class="bi bi-linkedin me-2" aria-hidden="true"></i>View on LinkedIn

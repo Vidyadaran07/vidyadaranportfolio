@@ -12,16 +12,15 @@ A single-page site covering my skills, experience, projects, services and a work
 ## Editing content
 
 All text on the page lives in **`config/portfolio.php`**: hero, about, skills, projects,
-services, experience, education, career objective, contact and navigation. Change it
+services, experience, work projects, "why work with me", contact and navigation. Change it
 there; the views in `resources/views/sections/` read from it.
 
-Email, GitHub, LinkedIn and resume links can be overridden in `.env`:
+Email, GitHub and LinkedIn links can be overridden in `.env`:
 
 ```
 PORTFOLIO_EMAIL=
 PORTFOLIO_GITHUB_URL=
 PORTFOLIO_LINKEDIN_URL=
-PORTFOLIO_RESUME_URL=
 ```
 
 Optional files (each one appears on the site as soon as it exists):
@@ -30,11 +29,23 @@ Optional files (each one appears on the site as soon as it exists):
 |---|---|
 | `public/images/profile-hero.webp` | Round photo in the hero (square). Set by `photo` in the config |
 | `public/images/profile-about.webp` | Portrait in the About card (4:5). Set by `about_photo`; falls back to the hero photo, then initials |
-| `public/resume.pdf` | "Download Resume" button; the card shows the career objective until then |
-| `public/images/projects/{slug}.png` | Real project screenshot (`crm`, `hrm`, `payroll`, `seminar-hall`, `ai-model`). Until then the card shows `{slug}-preview.webp`, an illustration with sample data labelled "Illustration" (HTML sources in `resources/previews/`) |
+| `public/images/projects/{slug}.png` | Real project screenshot (`crm`, `hrm`, `payroll`, `seminar-hall`, `ai-model`). Until then the card shows `{slug}-preview.webp`, a full app screen with sample data, labelled "Sample concept" (HTML sources in `resources/previews/`, see below) |
 
 A missing value shows a highlighted placeholder on your machine (`APP_ENV=local`)
 and is hidden on the live site.
+
+### Regenerating the solution previews
+
+Each `resources/previews/{slug}.html` is a 1440x810 app screen (its `card-shot` style zooms in 2x on
+the key area so text stays readable in the small card) that shares
+`resources/previews/app.css`. To update an image, render it with headless Chrome:
+
+```
+chrome --headless=new --hide-scrollbars --allow-file-access-from-files --window-size=1440,810 --force-device-scale-factor=2 --virtual-time-budget=6000 --screenshot=crm.png resources/previews/crm.html
+```
+
+then save the 2880x1620 result, without resizing, as `public/images/projects/{slug}-preview.webp`
+(WebP quality 95). Rendering at 2x and not resizing keeps the text sharp on high-density screens.
 
 ## Contact form email
 
@@ -72,8 +83,8 @@ resources/views/
   components/layouts/app.blade.php    Page layout (head, navbar, footer)
   components/                         brand-name, social-links, todo (placeholder)
   partials/                           navbar, footer
-  sections/                           hero, about (+ skills), experience, projects,
-                                      services, contact (+ resume)
+  sections/                           hero, about (+ skills), experience, work, projects,
+                                      services, contact (+ why work with me)
   mail/contact-message.blade.php      Email template
   errors/404.blade.php                Not-found page
 resources/scss/                       Design tokens and styles per area

@@ -1,70 +1,113 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link href="app.css" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 1200px; height: 675px; overflow: hidden; }
-  body { font-family: "Geist", sans-serif; font-size: 13px; color: #1C1917; position: relative;
-         background: radial-gradient(60% 80% at 80% 20%, #FDE68A, transparent 60%), linear-gradient(135deg, #FFFBEB, #FEF3C7); }
-  .paper { position: absolute; background: #fff; border-radius: 10px; box-shadow: 0 30px 60px -25px rgba(120,53,15,.45); }
-  .back { left: 330px; top: 110px; width: 520px; height: 450px; transform: rotate(5deg); opacity: .7; }
-  .slip { left: 300px; top: 92px; width: 560px; padding: 30px 34px; transform: rotate(-2.5deg); }
-  .top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 16px; border-bottom: 2px solid #1C1917; }
-  .co { display: flex; gap: 10px; align-items: center; }
-  .co i { width: 36px; height: 36px; border-radius: 9px; background: #D97706; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; }
-  .co b { display: block; font-size: 15px; }
-  .co small { color: #78716C; }
-  .title { text-align: right; }
-  .title b { font-size: 20px; letter-spacing: -.02em; display: block; }
-  .title small { color: #78716C; }
-  .emp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px 0; border-bottom: 1px dashed #D6D3D1; }
-  .emp small { display: block; color: #78716C; font-size: 11px; }
-  .emp b { font-size: 13px; }
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; padding: 14px 0; }
-  .cols h3 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #78716C; margin-bottom: 6px; }
-  .line { display: flex; justify-content: space-between; padding: 6px 0; font-family: "Geist Mono", monospace; font-size: 12.5px; border-bottom: 1px solid #F5F5F4; }
-  .line span:first-child { font-family: "Geist", sans-serif; }
-  .tot { font-weight: 700; border-bottom: 0; border-top: 1px solid #1C1917; }
-  .net { display: flex; justify-content: space-between; align-items: center; background: #1C1917; color: #fff; border-radius: 10px; padding: 14px 18px; }
-  .net small { color: #D6D3D1; display: block; }
-  .net b { font-size: 26px; font-family: "Geist Mono", monospace; letter-spacing: -.02em; color: #FCD34D; }
-  .stamp { position: absolute; left: 700px; top: 500px; transform: rotate(-14deg); border: 3px solid #16A34A; color: #16A34A; font-weight: 800; letter-spacing: .1em; padding: 6px 14px; border-radius: 8px; font-size: 18px; opacity: .85; }
-  .toast { position: absolute; left: 60px; top: 170px; background: #fff; border-radius: 14px; padding: 14px 16px; width: 220px; box-shadow: 0 20px 40px -20px rgba(120,53,15,.5); }
-  .toast b { display: block; font-size: 14px; } .toast small { color: #78716C; }
-  .toast .ok { width: 30px; height: 30px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: grid; place-items: center; font-weight: 800; margin-bottom: 8px; }
-  .mini { position: absolute; right: 60px; top: 150px; background: #fff; border-radius: 14px; padding: 14px 16px; width: 230px; box-shadow: 0 20px 40px -20px rgba(120,53,15,.5); }
-  .mini b { font-size: 13px; } .mini .bars { display: flex; align-items: flex-end; gap: 7px; height: 70px; margin-top: 10px; }
-  .mini .bars i { flex: 1; background: #FDE68A; border-radius: 4px 4px 2px 2px; } .mini .bars i:last-child { background: #D97706; }
-</style></head><body>
-  <div class="paper back"></div>
-  <div class="paper slip">
-    <div class="top">
-      <div class="co"><i>S</i><div><b>Sample Company Pvt Ltd</b><small>Payroll Department</small></div></div>
-      <div class="title"><b>Payslip</b><small>September 2026</small></div>
+  /* Payroll: icon rail + employee list + payslip document */
+  body { background: #EEEBF7; --accent: #7C3AED; --accent-soft: #F3EEFF; --accent-ink: #6D28D9; }
+  .rail { width: 72px; flex: none; background: #fff; border-right: 1px solid #E6E1F3; display: flex; flex-direction: column; align-items: center; padding: 18px 0; gap: 8px; }
+  .rail .mark { width: 40px; height: 40px; border-radius: 12px; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 19px; margin-bottom: 14px; }
+  .rail a { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; color: #94A3B8; font-size: 19px; }
+  .rail a.on { background: var(--accent-soft); color: var(--accent-ink); }
+  .rail .bottom { margin-top: auto; }
+  .people { width: 300px; flex: none; background: #FBFAFE; border-right: 1px solid #E6E1F3; display: flex; flex-direction: column; }
+  .people-head { padding: 20px 18px 12px; }
+  .people-head h1 { font-size: 18px; }
+  .people-head p { color: #64748B; margin-top: 2px; }
+  .people-head .search { margin: 12px 0 0; width: 100%; background: #fff; }
+  .person { display: flex; align-items: center; gap: 10px; padding: 11px 18px; border-left: 3px solid transparent; }
+  .person.on { background: #fff; border-color: var(--accent); }
+  .person .grow { flex: 1; }
+  .person small { display: block; color: #64748B; font-size: 12px; }
+  .person .amt { font-weight: 600; font-size: 12.5px; text-align: right; }
+  .stage { flex: 1; display: flex; flex-direction: column; padding: 18px 28px; gap: 14px; min-width: 0; }
+  .stage-top { display: flex; align-items: center; justify-content: space-between; }
+  .steps { display: flex; align-items: center; gap: 8px; color: #64748B; font-weight: 500; }
+  .steps .s { display: flex; align-items: center; gap: 6px; }
+  .steps .s i { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-style: normal; background: #E2E8F0; color: #475569; font-weight: 700; }
+  .steps .s.done i { background: #16A34A; color: #fff; }
+  .steps .s.cur { color: #0F172A; font-weight: 600; }
+  .steps .s.cur i { background: var(--accent); color: #fff; }
+  .steps .line { width: 26px; height: 2px; background: #D8D2EA; }
+  .slip { background: #fff; border-radius: 14px; box-shadow: 0 20px 40px -24px rgba(76,29,149,.45); border: 1px solid #E6E1F3; padding: 24px 28px; flex: 1; display: flex; flex-direction: column; }
+  .slip-head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 16px; border-bottom: 2px solid #F1EEF8; }
+  .co { display: flex; gap: 12px; align-items: center; }
+  .co .m { width: 44px; height: 44px; border-radius: 10px; background: #1E1B4B; color: #fff; display: grid; place-items: center; font-weight: 800; }
+  .co b { font-size: 16px; display: block; }
+  .co small { color: #64748B; }
+  .slip-head .t { text-align: right; }
+  .slip-head .t b { font-size: 17px; display: block; color: var(--accent-ink); }
+  .slip-head .t small { color: #64748B; }
+  .emp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 14px 0; border-bottom: 1px solid #F1EEF8; }
+  .emp small { color: #64748B; display: block; font-size: 11.5px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding-top: 14px; }
+  .cols h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: #64748B; margin-bottom: 6px; }
+  .ln { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #EDE9F6; }
+  .ln.tot { border: 0; font-weight: 700; padding-top: 9px; }
+  .ytd { margin-top: auto; margin-bottom: 14px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .ytd div { background: #F8F6FD; border: 1px solid #EDE9F6; border-radius: 10px; padding: 10px 12px; }
+  .ytd small { display: block; color: #64748B; font-size: 11.5px; margin-bottom: 2px; }
+  .net { background: linear-gradient(100deg, #6D28D9, #8B5CF6); color: #fff; border-radius: 12px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; }
+  .net small { opacity: .8; display: block; }
+  .net b { font-size: 26px; letter-spacing: -.02em; }
+</style>
+<style class="card-shot">/* Card shot: 2x zoomed crop so text stays readable in the small card */ body { transform: scale(2); transform-origin: 560px 0; }</style>
+</head><body>
+<nav class="rail">
+  <div class="mark"><i class="bi bi-cash-stack"></i></div>
+  <a><i class="bi bi-grid-1x2"></i></a><a class="on"><i class="bi bi-receipt"></i></a><a><i class="bi bi-people"></i></a><a><i class="bi bi-sliders"></i></a><a><i class="bi bi-bank"></i></a><a><i class="bi bi-bar-chart-line"></i></a>
+  <div class="bottom"><div class="av" style="background:#7C3AED">PN</div></div>
+</nav>
+<aside class="people">
+  <div class="people-head"><h1>October 2026 run</h1><p>146 employees · ₹16.3L net</p><div class="search"><i class="bi bi-search"></i>Find employee</div></div>
+  <div class="person"><div class="av" style="background:#6366F1">SR</div><div class="grow"><b>Santhosh Raj</b><small>Sales</small></div><div class="amt">₹30,840<br><span class="badge b-green">Paid</span></div></div>
+  <div class="person on"><div class="av" style="background:#0D9488">DK</div><div class="grow"><b>Divya Krishnan</b><small>Engineering</small></div><div class="amt">₹42,380<br><span class="badge b-violet">Review</span></div></div>
+  <div class="person"><div class="av" style="background:#F59E0B">PN</div><div class="grow"><b>Priya Natarajan</b><small>Finance</small></div><div class="amt">₹35,660<br><span class="badge b-green">Paid</span></div></div>
+  <div class="person"><div class="av" style="background:#EC4899">AM</div><div class="grow"><b>Arjun Mehta</b><small>Engineering</small></div><div class="amt">₹33,220<br><span class="badge b-amber">On hold</span></div></div>
+  <div class="person"><div class="av" style="background:#14B8A6">FB</div><div class="grow"><b>Fathima Begum</b><small>Operations</small></div><div class="amt">₹49,690<br><span class="badge b-green">Paid</span></div></div>
+  <div class="person"><div class="av" style="background:#64748B">KS</div><div class="grow"><b>Karthik S.</b><small>Support</small></div><div class="amt">₹23,150<br><span class="badge b-green">Paid</span></div></div>
+  <div class="person"><div class="av" style="background:#8B5CF6">NV</div><div class="grow"><b>Nisha Varghese</b><small>Marketing</small></div><div class="amt">₹27,900<br><span class="badge b-blue">Draft</span></div></div>
+  <div class="person"><div class="av" style="background:#F43F5E">MS</div><div class="grow"><b>Mohan Selvam</b><small>Operations</small></div><div class="amt">₹31,450<br><span class="badge b-green">Paid</span></div></div>
+  <div class="person"><div class="av" style="background:#0EA5E9">RG</div><div class="grow"><b>Rahul Gupta</b><small>Engineering</small></div><div class="amt">₹39,140<br><span class="badge b-green">Paid</span></div></div>
+</aside>
+<main class="stage">
+  <div class="stage-top">
+    <div class="steps"><span class="s done"><i>✓</i>Attendance</span><span class="line"></span><span class="s done"><i>✓</i>Calculate</span><span class="line"></span><span class="s cur"><i>3</i>Review payslips</span><span class="line"></span><span class="s"><i>4</i>Pay</span></div>
+    <div class="actions"><span class="btn"><i class="bi bi-printer"></i>Print</span><span class="btn"><i class="bi bi-file-earmark-pdf"></i>PDF</span><span class="btn primary"><i class="bi bi-check2"></i>Approve</span></div>
+  </div>
+  <div class="slip">
+    <div class="slip-head">
+      <div class="co"><div class="m">BT</div><div><b>Bluewave Technologies Pvt Ltd</b><small>No. 14, Anna Salai, Chennai 600002</small></div></div>
+      <div class="t"><b>PAYSLIP</b><small>October 2026 · Paid on 31 Oct</small></div>
     </div>
     <div class="emp">
       <div><small>Employee</small><b>Divya Krishnan</b></div>
       <div><small>Employee ID</small><b>EMP-0142</b></div>
-      <div><small>Paid days</small><b>30 / 30</b></div>
+      <div><small>Designation</small><b>Software Developer</b></div>
+      <div><small>Days paid</small><b>22 / 23</b></div>
     </div>
     <div class="cols">
       <div><h3>Earnings</h3>
-        <div class="line"><span>Basic</span><span>31,000</span></div>
-        <div class="line"><span>HRA</span><span>12,400</span></div>
-        <div class="line"><span>Special allowance</span><span>15,600</span></div>
-        <div class="line"><span>Bonus</span><span>3,000</span></div>
-        <div class="line tot"><span>Gross</span><span>62,000</span></div>
+        <div class="ln"><span>Basic salary</span><b>₹32,000</b></div>
+        <div class="ln"><span>House rent allowance</span><b>₹9,600</b></div>
+        <div class="ln"><span>Special allowance</span><b>₹3,400</b></div>
+        <div class="ln"><span>Conveyance</span><b>₹1,500</b></div>
+        <div class="ln tot"><span>Gross earnings</span><span>₹46,500</span></div>
       </div>
       <div><h3>Deductions</h3>
-        <div class="line"><span>Provident fund</span><span>3,720</span></div>
-        <div class="line"><span>Professional tax</span><span>200</span></div>
-        <div class="line"><span>TDS</span><span>3,520</span></div>
-        <div class="line"><span>&nbsp;</span><span>&nbsp;</span></div>
-        <div class="line tot"><span>Total</span><span>7,440</span></div>
+        <div class="ln"><span>Provident fund</span><b>₹1,800</b></div>
+        <div class="ln"><span>Professional tax</span><b>₹200</b></div>
+        <div class="ln"><span>Income tax (TDS)</span><b>₹1,760</b></div>
+        <div class="ln"><span>Loss of pay (1 day)</span><b>₹360</b></div>
+        <div class="ln tot"><span>Total deductions</span><span>₹4,120</span></div>
       </div>
     </div>
-    <div class="net"><div><small>Net pay (credited)</small>Fifty-four thousand five hundred sixty</div><b>₹54,560</b></div>
+    <div class="ytd">
+      <div><small>Gross YTD</small><b>₹4,65,000</b></div>
+      <div><small>Tax deducted YTD</small><b>₹17,600</b></div>
+      <div><small>PF balance</small><b>₹38,400</b></div>
+      <div><small>Paid to</small><b>HDFC ••••4417</b></div>
+    </div>
+    <div class="net"><div><small>Net pay for October</small>Forty-two thousand three hundred eighty rupees only</div><b>₹42,380</b></div>
   </div>
-  <div class="stamp">PAID</div>
-  <div class="toast"><div class="ok">✓</div><b>Payroll processed</b><small>248 payslips generated for September</small></div>
-  <div class="mini"><b>Monthly payroll cost</b><div class="bars"><i style="height:62%"></i><i style="height:66%"></i><i style="height:64%"></i><i style="height:72%"></i><i style="height:75%"></i><i style="height:80%"></i></div></div>
+</main>
 </body></html>

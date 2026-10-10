@@ -1,5 +1,5 @@
 {{--
-    GitHub, LinkedIn and Email as round icon buttons, plus the resume when one exists.
+    GitHub, LinkedIn and Email as round icon buttons.
     A missing value shows a placeholder on your machine and is hidden on the live site.
 --}}
 @php
@@ -10,10 +10,6 @@
         ['label' => 'LinkedIn', 'icon' => 'bi-linkedin', 'url' => config('portfolio.linkedin_url'), 'placeholder' => 'YOUR_LINKEDIN_URL'],
         ['label' => 'Email', 'icon' => 'bi-envelope', 'url' => $email ? "mailto:{$email}" : null, 'placeholder' => 'YOUR_EMAIL'],
     ];
-
-    if ($resumeUrl) {
-        $links[] = ['label' => 'Download resume', 'icon' => 'bi-download', 'url' => $resumeUrl, 'placeholder' => null];
-    }
 @endphp
 
 <ul {{ $attributes->merge(['class' => 'social-links']) }}>

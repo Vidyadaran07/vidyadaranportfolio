@@ -4,6 +4,7 @@
     $info = [
         ['icon' => 'bi-person', 'label' => 'Name', 'value' => config('portfolio.name')],
         ['icon' => 'bi-geo-alt', 'label' => 'Location', 'value' => config('portfolio.location')],
+        ['icon' => 'bi-briefcase', 'label' => 'Experience', 'value' => config('portfolio.total_experience'), 'wide' => true],
         ['icon' => 'bi-envelope', 'label' => 'Email', 'value' => $email, 'href' => $email ? "mailto:{$email}" : null, 'wide' => true],
         ['icon' => 'bi-calendar-check', 'label' => 'Availability', 'value' => config('portfolio.availability'), 'dot' => true, 'wide' => true],
     ];

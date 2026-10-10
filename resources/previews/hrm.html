@@ -1,74 +1,116 @@
 <!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link href="app.css" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { width: 1200px; height: 675px; overflow: hidden; }
-  /* Drawn at 80% size, then zoomed to fill 1200x675 */
-  body { width: 960px; height: 540px; zoom: 1.25; overflow: hidden; }
-  body { font-family: "Geist", sans-serif; font-size: 13px; color: #0F172A; background: linear-gradient(160deg, #CCFBF1, #F0FDFA 45%, #F8FAFC); }
-  .nav { height: 58px; background: #fff; border-bottom: 1px solid #E2E8F0; display: flex; align-items: center; gap: 28px; padding: 0 40px; }
-  .nav b { font-size: 17px; color: #0F766E; margin-right: 14px; }
-  .nav span { color: #64748B; font-weight: 500; }
-  .nav .on { color: #0F766E; box-shadow: inset 0 -2px #0D9488; padding: 19px 0; }
-  .wrap { display: grid; grid-template-columns: 340px 1fr; gap: 20px; padding: 26px 40px; }
-  .box { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px -18px rgba(15,23,42,.3); }
-  .profile { text-align: center; }
-  .ava { width: 96px; height: 96px; border-radius: 50%; margin: 6px auto 12px; background: linear-gradient(135deg, #14B8A6, #0F766E); color: #fff; font-size: 34px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 6px #CCFBF1; }
-  .profile h1 { font-size: 21px; }
-  .profile p { color: #64748B; margin-top: 2px; }
-  .chip { display: inline-block; margin-top: 10px; background: #F0FDFA; color: #0F766E; border-radius: 99px; padding: 4px 12px; font-weight: 600; font-size: 12px; }
-  .rows { margin-top: 18px; text-align: left; display: grid; gap: 0; }
-  .rows div { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #F1F5F9; }
-  .rows span { color: #64748B; }
-  .right { display: grid; grid-template-rows: auto 1fr; gap: 20px; }
-  .cal { gap: 8px; }
-  .up { margin-top: 16px; display: flex; gap: 12px; align-items: center; background: #F0FDFA; border: 1px dashed #5EEAD4; border-radius: 12px; padding: 12px 14px; }
-  .up b { display: block; } .up small { color: #64748B; }
-  .up i { width: 38px; height: 38px; border-radius: 10px; background: #0D9488; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 12px; }
-  h2 { font-size: 15px; margin-bottom: 14px; display: flex; justify-content: space-between; }
-  h2 small { color: #64748B; font-weight: 500; font-size: 12px; }
-  .cal { display: grid; grid-template-columns: repeat(14, 1fr); gap: 6px; }
-  .cal i { aspect-ratio: 1; border-radius: 6px; background: #14B8A6; }
-  .cal i.l { background: #99F6E4; } .cal i.a { background: #FCA5A5; } .cal i.w { background: #F1F5F9; } .cal i.h { background: #FDE68A; }
+  /* HRM: top navigation bar, employee profile page */
+  body { display: block; background: #F3F7F6; --accent: #0D9488; --accent-soft: #E6FAF7; --accent-ink: #0F766E; }
+  .bar { height: 60px; background: #fff; border-bottom: 1px solid #E3ECEA; display: flex; align-items: center; padding: 0 32px; gap: 34px; }
+  .bar .logo { color: #0F172A; padding: 0; font-size: 18px; }
+  .bar nav { display: flex; gap: 6px; height: 100%; }
+  .bar nav a { display: flex; align-items: center; gap: 7px; padding: 0 12px; color: #64748B; font-weight: 500; border-bottom: 2px solid transparent; }
+  .bar nav a.on { color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .bar .right { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+  .hero { height: 96px; background: linear-gradient(110deg, #0F766E, #14B8A6 60%, #5EEAD4); }
+  .wrap { padding: 0 32px; margin-top: -56px; display: grid; grid-template-columns: 330px 1fr; gap: 20px; height: 690px; }
+  .right-col > .card:first-child { flex: 1; }
+  .profile { display: flex; flex-direction: column; }
+  .profile .row-btns { margin-top: auto !important; }
+  .card { background: #fff; border: 1px solid #E3ECEA; border-radius: 16px; box-shadow: 0 10px 30px -18px rgba(15,118,110,.35); }
+  .profile { padding: 22px; text-align: center; }
+  .big { width: 92px; height: 92px; border-radius: 50%; margin: 0 auto; background: linear-gradient(135deg,#14B8A6,#0F766E); color: #fff; font-size: 32px; font-weight: 700; display: grid; place-items: center; border: 5px solid #fff; box-shadow: 0 0 0 1px #E3ECEA; }
+  .profile h1 { font-size: 21px; margin-top: 12px; }
+  .profile .sub { color: #64748B; margin-top: 2px; }
+  .profile .badges { display: flex; gap: 6px; justify-content: center; margin: 12px 0 16px; }
+  .facts { text-align: left; border-top: 1px solid #EEF3F2; }
+  .facts div { display: flex; justify-content: space-between; padding: 10px 2px; border-bottom: 1px solid #F2F6F5; }
+  .facts span { color: #64748B; }
+  .profile .row-btns { display: flex; gap: 8px; }
+  .profile .row-btns .btn { flex: 1; justify-content: center; }
+  .right-col { display: flex; flex-direction: column; gap: 16px; }
+  .tabs-line { display: flex; gap: 24px; padding: 0 20px; border-bottom: 1px solid #EEF3F2; }
+  .tabs-line span { padding: 14px 0 12px; color: #64748B; font-weight: 500; border-bottom: 2px solid transparent; }
+  .tabs-line .on { color: #0F172A; border-color: var(--accent); font-weight: 600; }
+  .sec { padding: 18px 20px; }
+  .sec-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .sec-head h2 { font-size: 15px; }
+  .sec-head small { color: #64748B; }
+  .month { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .month .d { height: 50px; border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+  .month .w { font-size: 11px; color: #94A3B8; text-align: center; font-weight: 600; }
+  .p { background: #CCFBF1; color: #0F766E; } .l { background: #FEF3C7; color: #92400E; } .h { background: #E0E7FF; color: #3730A3; }
+  .o { background: #F8FAFC; color: #CBD5E1; } .t { background: var(--accent); color: #fff; } .a { background: #FEE2E2; color: #B91C1C; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+  .stats div { background: #F8FBFA; border: 1px solid #E8F0EE; border-radius: 10px; padding: 10px 12px; }
+  .stats small { display: block; color: #64748B; font-size: 11.5px; }
   .legend { display: flex; gap: 16px; margin-top: 12px; color: #64748B; font-size: 12px; }
-  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--c); vertical-align: -1px; }
-  .rings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .ring { display: flex; align-items: center; gap: 12px; background: #F8FAFC; border-radius: 12px; padding: 12px; }
-  .ring b { display: block; font-size: 18px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .two { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
+  .rings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ring { text-align: center; background: #F8FBFA; border-radius: 12px; padding: 12px 6px; }
+  .ring .c { width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 8px; display: grid; place-items: center; }
+  .ring .c b { width: 48px; height: 48px; border-radius: 50%; background: #F8FBFA; display: grid; place-items: center; font-size: 14px; }
   .ring small { color: #64748B; }
-</style></head><body>
-  <div class="nav"><b>PeopleHub</b><span>Dashboard</span><span class="on">Employees</span><span>Attendance</span><span>Leave</span><span>Documents</span></div>
-  <div class="wrap">
-    <div class="box profile">
-      <div class="ava">DK</div>
-      <h1>Divya Krishnan</h1>
-      <p>Software Developer · Engineering</p>
-      <span class="chip">● Active · EMP-0142</span>
-      <div class="rows">
-        <div><span>Reporting to</span><b>Vijay Mohan</b></div>
-        <div><span>Joined</span><b>12 Jan 2024</b></div>
-        <div><span>Work location</span><b>Head Office</b></div>
-        <div><span>Employment</span><b>Full-time</b></div>
+  .doc { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #F2F6F5; }
+  .doc:last-child { border: 0; }
+  .doc > i { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; }
+  .doc small { display: block; color: #64748B; font-size: 11.5px; }
+  .doc .bi-download { margin-left: auto; color: #94A3B8; background: none; }
+</style>
+<style class="card-shot">/* Card shot: 2x zoomed crop so text stays readable in the small card */ body { transform: scale(2); transform-origin: 0 0; }</style>
+</head><body>
+<header class="bar">
+  <div class="logo"><i class="bi bi-person-badge-fill"></i>PeopleHub</div>
+  <nav><a><i class="bi bi-house"></i>Home</a><a class="on"><i class="bi bi-people"></i>Employees</a><a><i class="bi bi-clock-history"></i>Attendance</a><a><i class="bi bi-calendar2-check"></i>Leave</a><a><i class="bi bi-diagram-3"></i>Org Chart</a><a><i class="bi bi-bar-chart-line"></i>Reports</a></nav>
+  <div class="right"><div class="icon-btn"><i class="bi bi-search"></i></div><div class="icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></div><div class="av" style="background:#0D9488">KR</div></div>
+</header>
+<div class="hero"></div>
+<div class="wrap">
+  <aside class="card profile">
+    <div class="big">DK</div>
+    <h1>Divya Krishnan</h1>
+    <div class="sub">Software Developer · Engineering</div>
+    <div class="badges"><span class="badge b-green">Active</span><span class="badge b-gray">EMP-0142</span></div>
+    <div class="facts">
+      <div><span>Reporting to</span><b>Vijay Mohan</b></div>
+      <div><span>Joined</span><b>12 Jan 2024</b></div>
+      <div><span>Work location</span><b>Head Office</b></div>
+      <div><span>Employment</span><b>Full-time</b></div>
+      <div><span>Phone</span><b>+91 98xxx 41207</b></div>
+    </div>
+    <div class="row-btns"><span class="btn"><i class="bi bi-pencil"></i>Edit</span><span class="btn primary"><i class="bi bi-envelope"></i>Message</span></div>
+  </aside>
+  <section class="right-col">
+    <div class="card">
+      <div class="tabs-line"><span>Overview</span><span class="on">Attendance</span><span>Leave</span><span>Documents</span><span>Salary</span></div>
+      <div class="sec">
+        <div class="sec-head"><h2>October 2026</h2><small>21 present · 1 leave · 1 absent · 2 late</small></div>
+        <div class="month">
+          <div class="w">Mon</div><div class="w">Tue</div><div class="w">Wed</div><div class="w">Thu</div><div class="w">Fri</div><div class="w">Sat</div><div class="w">Sun</div>
+          <div class="d o"></div><div class="d o"></div><div class="d p">1</div><div class="d h">2</div><div class="d p">3</div><div class="d o">4</div><div class="d o">5</div>
+          <div class="d p">6</div><div class="d p">7</div><div class="d l">8</div><div class="d p">9</div><div class="d p">10</div><div class="d o">11</div><div class="d o">12</div>
+          <div class="d p">13</div><div class="d p">14</div><div class="d a">15</div><div class="d p">16</div><div class="d p">17</div><div class="d o">18</div><div class="d o">19</div>
+          <div class="d t">20</div><div class="d o">21</div><div class="d o">22</div><div class="d o">23</div><div class="d o">24</div><div class="d o">25</div><div class="d o">26</div>
+        </div>
+        <div class="legend"><span><i class="p"></i>Present</span><span><i class="l"></i>Leave</span><span><i class="h"></i>Holiday</span><span><i class="a"></i>Absent</span><span><i class="t"></i>Today</span></div>
+        <div class="stats"><div><small>Avg check-in</small><b>09:04 AM</b></div><div><small>Avg working hours</small><b>8h 42m</b></div><div><small>Late arrivals</small><b>2 days</b></div><div><small>Overtime</small><b>6h 15m</b></div></div>
       </div>
     </div>
-    <div class="right">
-      <div class="box">
-        <h2>Attendance · October <small>21 present · 1 leave · 0 absent</small></h2>
-        <div class="cal">
-          <i></i><i></i><i></i><i></i><i></i><i class="w"></i><i class="w"></i><i></i><i></i><i class="l"></i><i></i><i></i><i class="w"></i><i class="w"></i>
-          <i></i><i class="h"></i><i></i><i></i><i></i><i class="w"></i><i class="w"></i><i></i><i></i><i></i><i></i><i></i><i class="w"></i><i class="w"></i>
-        </div>
-        <div class="legend"><span style="--c:#14B8A6">Present</span><span style="--c:#99F6E4">Leave</span><span style="--c:#FDE68A">Holiday</span><span style="--c:#FCA5A5">Absent</span></div>
-      </div>
-      <div class="box">
-        <h2>Leave Balance <small>2026</small></h2>
+    <div class="two">
+      <div class="card sec">
+        <div class="sec-head"><h2>Leave balance</h2><small>2026</small></div>
         <div class="rings">
-          <div class="ring"><svg width="52" height="52" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#E2E8F0" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#0D9488" stroke-width="4" stroke-dasharray="66 94" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><div><b>8 / 12</b><small>Casual</small></div></div>
-          <div class="ring"><svg width="52" height="52" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#E2E8F0" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#F59E0B" stroke-width="4" stroke-dasharray="47 94" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><div><b>5 / 10</b><small>Sick</small></div></div>
-          <div class="ring"><svg width="52" height="52" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#E2E8F0" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#6366F1" stroke-width="4" stroke-dasharray="80 94" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><div><b>13 / 15</b><small>Earned</small></div></div>
+          <div class="ring"><div class="c" style="background:conic-gradient(#0D9488 0 67%,#E2E8F0 0)"><b>8</b></div><small>Casual · of 12</small></div>
+          <div class="ring"><div class="c" style="background:conic-gradient(#F59E0B 0 50%,#E2E8F0 0)"><b>5</b></div><small>Sick · of 10</small></div>
+          <div class="ring"><div class="c" style="background:conic-gradient(#6366F1 0 87%,#E2E8F0 0)"><b>13</b></div><small>Earned · of 15</small></div>
         </div>
-        <div class="up"><i>24</i><div><b>Upcoming leave · Casual</b><small>Thu 24 Oct · Approved by Vijay Mohan</small></div></div>
+      </div>
+      <div class="card sec">
+        <div class="sec-head"><h2>Documents</h2><small>4 files</small></div>
+        <div class="doc"><i class="bi bi-file-earmark-text"></i><div><b>Offer letter</b><small>PDF · 12 Jan 2024</small></div><i class="bi bi-download"></i></div>
+        <div class="doc"><i class="bi bi-person-vcard"></i><div><b>ID proof</b><small>Verified</small></div><i class="bi bi-download"></i></div>
+        <div class="doc"><i class="bi bi-mortarboard"></i><div><b>Certificates</b><small>3 files</small></div><i class="bi bi-download"></i></div>
       </div>
     </div>
-  </div>
+  </section>
+</div>
 </body></html>

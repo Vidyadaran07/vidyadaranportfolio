@@ -1,6 +1,6 @@
 // -----------------------------------------------------------------------------
 // Home page sections: about, skills, experience, projects, services,
-// resume and contact.
+// why-work-with-me and contact.
 // -----------------------------------------------------------------------------
 
 // Hover lift shared by tiles and project cards
@@ -300,8 +300,8 @@
   }
 }
 
-// Resume card
-.resume-card {
+// "Why work with me" card next to the contact form
+.why-card {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -321,7 +321,7 @@
     color: $vm-muted;
   }
 
-  .resume-actions {
+  .why-actions {
     margin-top: auto;
     display: flex;
     flex-wrap: wrap;

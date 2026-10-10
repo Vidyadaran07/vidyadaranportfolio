@@ -1,66 +1,99 @@
 <!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link href="app.css" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 1200px; height: 675px; overflow: hidden; }
-  body { font-family: "Geist", sans-serif; font-size: 13px; color: #1E1B4B; position: relative;
-         background: radial-gradient(60% 90% at 20% 10%, #8B5CF6, transparent 60%), radial-gradient(60% 80% at 90% 90%, #6366F1, transparent 60%), #4C1D95; }
-  .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.12) 1.5px, transparent 1.5px); background-size: 26px 26px; }
-  .phone { position: absolute; left: 470px; top: 40px; width: 300px; height: 620px; background: #0F0A1F; border-radius: 44px; padding: 12px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
-  .screen { width: 100%; height: 100%; background: #FAF8FF; border-radius: 34px; overflow: hidden; position: relative; }
-  .notch { position: absolute; left: 50%; top: 10px; width: 90px; height: 24px; margin-left: -45px; background: #0F0A1F; border-radius: 99px; z-index: 2; }
-  .hero { height: 170px; background: linear-gradient(160deg, #A78BFA, #6D28D9); position: relative; overflow: hidden; }
-  .seats { position: absolute; left: 20px; right: 20px; bottom: 14px; display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
-  .seats i { height: 10px; border-radius: 3px 3px 1px 1px; background: rgba(255,255,255,.35); }
-  .stage { position: absolute; left: 50px; right: 50px; top: 52px; height: 30px; border-radius: 6px; background: rgba(255,255,255,.9); color: #6D28D9; font-weight: 700; font-size: 11px; display: grid; place-items: center; letter-spacing: .1em; }
-  .body { padding: 16px 18px; }
-  .body h1 { font-size: 19px; letter-spacing: -.02em; }
-  .meta { color: #6B7280; margin: 3px 0 12px; }
-  .chips { display: flex; gap: 6px; margin-bottom: 14px; }
-  .chips span { background: #EDE9FE; color: #6D28D9; font-weight: 600; font-size: 11px; padding: 4px 9px; border-radius: 99px; }
-  .lbl { font-weight: 600; font-size: 12px; margin-bottom: 8px; }
-  .days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 14px; }
-  .days div { border: 1px solid #E9E5F5; border-radius: 10px; text-align: center; padding: 6px 0; font-size: 11px; color: #6B7280; background: #fff; }
-  .days b { display: block; font-size: 15px; color: #1E1B4B; }
-  .days .on { background: #7C3AED; border-color: #7C3AED; color: #E9D5FF; } .days .on b { color: #fff; }
-  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
-  .slots span { text-align: center; border: 1px solid #E9E5F5; background: #fff; border-radius: 8px; padding: 7px 0; font-size: 11.5px; font-weight: 500; }
-  .slots .x { color: #C4B5FD; text-decoration: line-through; background: #F5F3FF; }
-  .slots .on { background: #1E1B4B; color: #fff; border-color: #1E1B4B; }
-  .cta { background: #7C3AED; color: #fff; text-align: center; font-weight: 700; padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px -10px #7C3AED; }
-  .float { position: absolute; background: #fff; border-radius: 16px; padding: 16px 18px; box-shadow: 0 30px 60px -25px rgba(0,0,0,.5); }
-  .confirm { left: 820px; top: 150px; width: 280px; }
-  .confirm .ic { width: 38px; height: 38px; border-radius: 12px; background: #DCFCE7; color: #16A34A; display: grid; place-items: center; font-weight: 800; font-size: 18px; margin-bottom: 10px; }
-  .confirm b { font-size: 16px; display: block; }
-  .confirm p { color: #6B7280; margin-top: 4px; line-height: 1.5; }
-  .avail { left: 110px; top: 330px; width: 300px; }
-  .avail b { display: block; margin-bottom: 10px; font-size: 14px; }
-  .hall { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-top: 1px solid #F3F0FA; }
-  .p { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
-  .free { background: #DCFCE7; color: #15803D; } .busy { background: #FEE2E2; color: #B91C1C; }
-  .title { position: absolute; left: 110px; top: 120px; color: #fff; }
-  .title small { font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #DDD6FE; font-size: 12px; }
-  .title h2 { font-size: 40px; line-height: 1.05; letter-spacing: -.03em; margin-top: 8px; }
-</style></head><body>
-  <div class="dots"></div>
-  <div class="title"><small>Seminar hall booking</small><h2>Book a hall<br>in three taps.</h2></div>
-  <div class="phone"><div class="screen"><div class="notch"></div>
-    <div class="hero"><div class="stage">STAGE</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="body">
-      <h1>Main Auditorium</h1>
-      <div class="meta">Block A · Ground floor</div>
-      <div class="chips"><span>250 seats</span><span>Projector</span><span>A/C</span></div>
-      <div class="lbl">Select date</div>
-      <div class="days"><div>Mon<b>14</b></div><div>Tue<b>15</b></div><div class="on">Wed<b>16</b></div><div>Thu<b>17</b></div><div>Fri<b>18</b></div></div>
-      <div class="lbl">Available slots</div>
-      <div class="slots"><span class="x">9:00</span><span class="on">10:00</span><span>11:00</span><span>12:00</span><span class="x">2:00</span><span>3:00</span></div>
-      <div class="cta">Confirm Booking</div>
+  /* Seminar hall: user-facing booking page, hall cards + booking form */
+  body { display: block; background: #FFFBF7; --accent: #EA580C; --accent-soft: #FFF1E8; --accent-ink: #C2410C; }
+  .bar { height: 64px; display: flex; align-items: center; padding: 0 36px; gap: 28px; background: #fff; border-bottom: 1px solid #F3E8DF; }
+  .bar .logo { color: #0F172A; padding: 0; }
+  .bar nav { display: flex; gap: 22px; color: #64748B; font-weight: 500; }
+  .bar nav .on { color: #0F172A; font-weight: 600; }
+  .bar .right { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+  .page { display: grid; grid-template-columns: 1fr 380px; gap: 24px; padding: 22px 36px; height: 746px; }
+  .book { display: flex; flex-direction: column; }
+  .book .submit { margin-top: auto; }
+  .title h1 { font-size: 24px; letter-spacing: -.02em; }
+  .title p { color: #64748B; margin-top: 3px; }
+  .filters { display: flex; gap: 8px; margin: 14px 0 16px; }
+  .chip { padding: 7px 13px; border-radius: 99px; border: 1px solid #EADFD5; background: #fff; color: #475569; font-weight: 500; display: flex; gap: 6px; align-items: center; }
+  .chip.on { background: #0F172A; color: #fff; border-color: #0F172A; }
+  .halls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .hall { background: #fff; border: 1px solid #F0E4DA; border-radius: 16px; overflow: hidden; }
+  .hall.sel { border: 2px solid var(--accent); box-shadow: 0 14px 30px -16px rgba(234,88,12,.5); }
+  .ph { height: 172px; position: relative; display: flex; align-items: flex-end; padding: 10px; }
+  .ph .seats { position: absolute; inset: 22px 26px 34px; display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; align-content: end; }
+  .ph .seats i { height: 7px; border-radius: 2px; background: rgba(255,255,255,.55); }
+  .ph .stage-bar { position: absolute; top: 12px; left: 30%; right: 30%; height: 8px; border-radius: 4px; background: rgba(255,255,255,.8); }
+  .ph .tag { position: relative; background: rgba(255,255,255,.92); border-radius: 99px; padding: 3px 9px; font-size: 11.5px; font-weight: 600; }
+  .hall .body { padding: 12px 14px 14px; }
+  .hall h3 { font-size: 15px; }
+  .hall .meta { color: #64748B; display: flex; gap: 12px; margin: 4px 0 10px; font-size: 12.5px; }
+  .hall .meta span { display: flex; gap: 4px; align-items: center; }
+  .amen { display: flex; gap: 6px; flex-wrap: wrap; }
+  .amen span { font-size: 11.5px; background: #F8F5F2; color: #57534E; border-radius: 6px; padding: 3px 7px; }
+  .book { background: #fff; border: 1px solid #F0E4DA; border-radius: 18px; padding: 20px; box-shadow: 0 20px 40px -28px rgba(124,45,18,.4); }
+  .book h2 { font-size: 17px; }
+  .book .for { color: #64748B; margin: 2px 0 14px; }
+  .cal-head { display: flex; justify-content: space-between; align-items: center; font-weight: 600; margin-bottom: 8px; }
+  .mini { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px; }
+  .mini .w { color: #94A3B8; font-weight: 600; font-size: 11px; padding: 2px 0; }
+  .mini span { padding: 9px 0; border-radius: 8px; }
+  .mini .x { color: #CBD5E1; text-decoration: line-through; }
+  .mini .on { background: var(--accent); color: #fff; font-weight: 700; }
+  .mini .bk { background: #FEE2E2; color: #B91C1C; }
+  .lbl { font-weight: 600; margin: 14px 0 8px; display: block; }
+  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .slots span { text-align: center; padding: 10px 0; border: 1px solid #EADFD5; border-radius: 9px; font-weight: 500; font-size: 12.5px; }
+  .slots .on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; }
+  .slots .x { color: #CBD5E1; background: #FAFAF9; text-decoration: line-through; }
+  .field { border: 1px solid #EADFD5; border-radius: 9px; padding: 9px 11px; color: #475569; display: flex; justify-content: space-between; }
+  .submit { margin-top: 14px; width: 100%; height: 42px; border-radius: 11px; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .note { color: #64748B; font-size: 11.5px; text-align: center; margin-top: 8px; }
+</style>
+<style class="card-shot">/* Card shot: 2x zoomed crop so text stays readable in the small card */ body { transform: scale(2); transform-origin: 0 140px; }</style>
+</head><body>
+<header class="bar">
+  <div class="logo"><i class="bi bi-calendar-check-fill"></i>HallBook</div>
+  <nav><span class="on">Book a Hall</span><span>My Bookings</span><span>Calendar</span><span>Approvals</span></nav>
+  <div class="right"><div class="icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></div><div class="me"><div class="av" style="background:#EA580C">MP</div><div><b>Meera P.</b><small>CSE Department</small></div></div></div>
+</header>
+<div class="page">
+  <section>
+    <div class="title"><h1>Find a hall for your event</h1><p>6 halls · live availability · bookings are approved by the facility team</p></div>
+    <div class="filters"><span class="chip on"><i class="bi bi-calendar3"></i>Thu, 22 Oct</span><span class="chip"><i class="bi bi-people"></i>100+ seats</span><span class="chip"><i class="bi bi-projector"></i>Projector</span><span class="chip"><i class="bi bi-snow"></i>AC</span><span class="chip"><i class="bi bi-mic"></i>Sound system</span></div>
+    <div class="halls">
+      <div class="hall sel"><div class="ph" style="background:linear-gradient(135deg,#F97316,#C2410C)"><span class="stage-bar"></span><span class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tag">● Available</span></div>
+        <div class="body"><h3>Seminar Hall A</h3><div class="meta"><span><i class="bi bi-people"></i>120 seats</span><span><i class="bi bi-geo-alt"></i>Block 2, 1st floor</span></div><div class="amen"><span>Projector</span><span>AC</span><span>Mic</span><span>Wi-Fi</span></div></div></div>
+      <div class="hall"><div class="ph" style="background:linear-gradient(135deg,#0EA5E9,#1E40AF)"><span class="stage-bar"></span><span class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tag">● 2 slots left</span></div>
+        <div class="body"><h3>Main Auditorium</h3><div class="meta"><span><i class="bi bi-people"></i>400 seats</span><span><i class="bi bi-geo-alt"></i>Admin block</span></div><div class="amen"><span>Stage</span><span>Sound</span><span>AC</span><span>Recording</span></div></div></div>
+      <div class="hall"><div class="ph" style="background:linear-gradient(135deg,#22C55E,#15803D)"><span class="stage-bar"></span><span class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tag">● Available</span></div>
+        <div class="body"><h3>Seminar Hall B</h3><div class="meta"><span><i class="bi bi-people"></i>80 seats</span><span><i class="bi bi-geo-alt"></i>Block 3</span></div><div class="amen"><span>Projector</span><span>AC</span><span>Whiteboard</span></div></div></div>
+      <div class="hall"><div class="ph" style="background:linear-gradient(135deg,#A855F7,#6D28D9)"><span class="stage-bar"></span><span class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tag">● Available</span></div>
+        <div class="body"><h3>Conference Room</h3><div class="meta"><span><i class="bi bi-people"></i>30 seats</span><span><i class="bi bi-geo-alt"></i>Admin block</span></div><div class="amen"><span>TV screen</span><span>Video call</span><span>AC</span></div></div></div>
+      <div class="hall"><div class="ph" style="background:linear-gradient(135deg,#94A3B8,#475569)"><span class="stage-bar"></span><span class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tag">● Fully booked</span></div>
+        <div class="body"><h3>Lab Hall 2</h3><div class="meta"><span><i class="bi bi-people"></i>60 seats</span><span><i class="bi bi-geo-alt"></i>Block 1</span></div><div class="amen"><span>60 PCs</span><span>Projector</span><span>AC</span></div></div></div>
+      <div class="hall"><div class="ph" style="background:linear-gradient(135deg,#F43F5E,#BE123C)"><span class="stage-bar"></span><span class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="tag">● Available</span></div>
+        <div class="body"><h3>Open Air Theatre</h3><div class="meta"><span><i class="bi bi-people"></i>250 seats</span><span><i class="bi bi-geo-alt"></i>Campus garden</span></div><div class="amen"><span>Stage</span><span>Sound</span><span>Lighting</span></div></div></div>
     </div>
-  </div></div>
-  <div class="float confirm"><div class="ic">✓</div><b>Booking confirmed</b><p>Main Auditorium<br>Wed 16 Oct · 10:00 – 12:00<br>Tech Seminar · 120 attendees</p></div>
-  <div class="float avail"><b>Halls today</b>
-    <div class="hall"><span>Main Auditorium</span><span class="p busy">Booked</span></div>
-    <div class="hall"><span>Hall A</span><span class="p free">Available</span></div>
-    <div class="hall"><span>Hall B</span><span class="p free">Available</span></div>
-  </div>
+  </section>
+  <aside class="book">
+    <h2>Book Seminar Hall A</h2>
+    <div class="for">120 seats · Block 2, 1st floor</div>
+    <div class="cal-head"><i class="bi bi-chevron-left"></i>October 2026<i class="bi bi-chevron-right"></i></div>
+    <div class="mini">
+      <span class="w">M</span><span class="w">T</span><span class="w">W</span><span class="w">T</span><span class="w">F</span><span class="w">S</span><span class="w">S</span>
+      <span class="x">12</span><span class="x">13</span><span class="x">14</span><span class="x">15</span><span class="x">16</span><span class="x">17</span><span class="x">18</span>
+      <span>19</span><span class="bk">20</span><span>21</span><span class="on">22</span><span>23</span><span>24</span><span>25</span>
+      <span>26</span><span>27</span><span class="bk">28</span><span>29</span><span>30</span><span>31</span><span></span>
+    </div>
+    <span class="lbl">Time slot</span>
+    <div class="slots"><span>9:00 AM</span><span class="x">10:00 AM</span><span class="x">11:00 AM</span><span class="on">2:00 PM</span><span>3:00 PM</span><span>4:00 PM</span></div>
+    <span class="lbl">Event details</span>
+    <div class="field"><span>Hackathon briefing</span><span>85 people</span></div>
+    <div class="field" style="margin-top:8px"><span>Equipment</span><span>Projector, 2 mics</span></div>
+    <div class="field" style="margin-top:8px"><span>Organiser</span><span>CSE Department</span></div>
+    <div class="submit"><i class="bi bi-send"></i>Request Booking</div>
+    <div class="note">You will get an email once the facility team approves.</div>
+  </aside>
+</div>
 </body></html>

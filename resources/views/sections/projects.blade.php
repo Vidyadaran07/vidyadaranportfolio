@@ -44,6 +44,8 @@
 
                                 @if ($offered)
                                     <span class="thumb-note">{{ $projects['badge'] }}</span>
+                                @elseif (isset($project['status']))
+                                    <span class="thumb-note">{{ $project['status'] }}</span>
                                 @endif
                             </div>
 
@@ -78,6 +80,10 @@
                                             <button type="button" class="link-arrow" data-bs-toggle="modal" data-bs-target="#project-{{ $project['slug'] }}">
                                                 What you get <i class="bi bi-arrow-right" aria-hidden="true"></i>
                                             </button>
+                                        </div>
+                                    @else
+                                        <div class="project-actions">
+                                            <a href="#contact" class="btn btn-outline-ink btn-sm" data-interest="{{ $project['short_title'] }}">Ask about this</a>
                                         </div>
                                     @endif
                                 </div>

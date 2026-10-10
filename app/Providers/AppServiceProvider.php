@@ -20,14 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Photos and resume are optional files; views only show them once they exist.
+        // Photos are optional files; views only show them once they exist.
         View::composer('*', function ($view) {
             $photoUrl = $this->publicFileUrl(config('portfolio.photo'));
 
             $view->with([
                 'photoUrl' => $photoUrl,
                 'aboutPhotoUrl' => $this->publicFileUrl(config('portfolio.about_photo')) ?? $photoUrl,
-                'resumeUrl' => config('portfolio.resume_url') ?: $this->publicFileUrl(config('portfolio.resume_file')),
             ]);
         });
     }
