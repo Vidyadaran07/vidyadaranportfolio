@@ -49,7 +49,7 @@
   .data i { color: #22D3EE; }
   .data em { margin-left: auto; font-style: normal; color: #64748B; font-size: 12px; }
 </style>
-<style class="card-shot">/* Card shot: 2x zoomed crop so text stays readable in the small card */ body { transform: scale(2); transform-origin: 520px 0; }</style>
+<style class="card-shot">/* Card shot: 1.8x zoom on the conversation only, sized so no bubble is cut at the image edge */ body { transform: scale(1.8); transform-origin: 0 0; } .chats, .model, .sources { display: none; } .convo { flex: none; width: 800px; height: 450px; overflow: hidden; } .msgs { padding: 18px 24px; } .convo-top { flex: none; } .msgs .msg:nth-child(n+3), .suggest, .composer { display: none; }</style>
 </head><body>
 <aside class="chats">
   <div class="logo"><i class="bi bi-stars"></i>InsightAI</div>

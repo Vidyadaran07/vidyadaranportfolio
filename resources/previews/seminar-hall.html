@@ -50,7 +50,7 @@
   .submit { margin-top: 14px; width: 100%; height: 42px; border-radius: 11px; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .note { color: #64748B; font-size: 11.5px; text-align: center; margin-top: 8px; }
 </style>
-<style class="card-shot">/* Card shot: 2x zoomed crop so text stays readable in the small card */ body { transform: scale(2); transform-origin: 0 140px; }</style>
+<style class="card-shot">/* Card shot: 1.8x zoom on a 2-column hall list, so no hall card is cut at the image edge */ body { transform: scale(1.8); transform-origin: 0 0; } .bar { width: 800px; } .bar nav span:nth-child(n+3) { display: none; } .bar .me div:last-child { display: none; } .page { width: 800px; grid-template-columns: 1fr; padding: 18px 28px; } .book { display: none; } .halls { grid-template-columns: repeat(2, 1fr); } .halls .hall:nth-child(n+3) { display: none; } .ph { height: 96px; } .filters span:nth-child(n+4) { display: none; }</style>
 </head><body>
 <header class="bar">
   <div class="logo"><i class="bi bi-calendar-check-fill"></i>HallBook</div>
